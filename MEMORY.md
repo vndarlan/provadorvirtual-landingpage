@@ -44,15 +44,26 @@
 - **URL:** https://github.com/vndarlan/openclaw-provadorvirtual
 - **Local:** `/home/clawd/.openclaw/workspace/look.me/repo/`
 
-## Stack (a definir)
+## Stack (definida)
 
-### Sugestão Inicial
-- **Frontend:** Next.js 14 (App Router)
-- **Styling:** Tailwind CSS
-- **Backend:** API Routes do Next.js ou Node separado
-- **Try-on Model:** IDM-VTON / OOTDiffusion / API terceira
-- **Deploy:** Vercel (rápido pra MVP)
+- **Frontend:** Next.js 14 (App Router) + TypeScript
+- **Styling:** Tailwind CSS (dark theme)
+- **Animações:** Framer Motion
+- **Icons:** Lucide React
+- **Try-on Model:** IDM-VTON / OOTDiffusion / API terceira (a definir)
+- **Deploy:** Railway
 - **Repo:** GitHub vndarlan/openclaw-provadorvirtual
+- **URL Repo:** https://github.com/vndarlan/openclaw-provadorvirtual
+
+## Identidade Visual
+
+- **Marca:** look.me
+- **Slogan:** "O provador oficial do seu e-commerce."
+- **Paleta:** Dark theme (inspirado em Seedream)
+  - Background: #0A0A0B
+  - Surface: #141416
+  - Accent: #6366F1 (violeta)
+  - Text: #FFFFFF / #8B8D98
 
 ## Referências
 
