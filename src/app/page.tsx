@@ -29,8 +29,6 @@ import {
   Package,
   Menu,
   X,
-  MessageCircle,
-  Quote,
   Zap,
   Lock,
   Headphones,
@@ -742,97 +740,6 @@ function WhatMakesUsUnique() {
 }
 
 // ============================================
-// CLIENTES (LOGOS)
-// ============================================
-function Clients() {
-  return (
-    <section className="py-24 md:py-32 bg-white">
-      <div className="max-w-7xl mx-auto px-4 md:px-6">
-        <AnimatedText className="text-center mb-16">
-          <SectionLabel>Clientes</SectionLabel>
-          <h2 className="text-3xl md:text-5xl font-bold text-textDark">
-            Marcas que confiam no look.me
-          </h2>
-        </AnimatedText>
-        
-        <AnimatedText>
-          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-8">
-            {[1, 2, 3, 4, 5, 6].map((i) => (
-              <div 
-                key={i}
-                className="h-20 rounded-xl bg-backgroundAlt border border-black/5 flex items-center justify-center text-textMuted/30 font-bold"
-              >
-                LOGO {i}
-              </div>
-            ))}
-          </div>
-          <p className="text-center text-textMuted text-sm mt-8">
-            Adicione os logos dos seus clientes aqui
-          </p>
-        </AnimatedText>
-      </div>
-    </section>
-  )
-}
-
-// ============================================
-// TESTIMONIALS
-// ============================================
-function Testimonials() {
-  const testimonials = [
-    {
-      quote: "Somos uma empresa focada em inclusão de tamanhos, e o look.me ajuda clientes a preverem como algo vai ficar neles. Criamos uma espécie de boneca de papel moderna com a qual os clientes podem se divertir.",
-      author: "Marina Santos",
-      role: "VP E-commerce",
-      company: "ModaViva",
-    },
-    {
-      quote: "Graças ao look.me, os pais agora podem realmente se divertir criando looks para seus filhos, e os resultados falam por si: passam mais tempo no site, exploram mais e compram mais.",
-      author: "Ricardo Almeida",
-      role: "Líder Digital",
-      company: "StyleBR Kids",
-    },
-    {
-      quote: "Implementar a tecnologia de prova virtual com IA do look.me é uma extensão natural da nossa abordagem tech-first. É um ótimo exemplo de como estamos usando IA para transformar a forma como as pessoas compram.",
-      author: "Carla Mendes",
-      role: "SVP de Estratégia",
-      company: "Elegance Store",
-    },
-  ]
-  
-  return (
-    <section className="py-24 md:py-32 bg-primary">
-      <div className="max-w-7xl mx-auto px-4 md:px-6">
-        <AnimatedText className="text-center mb-16 md:mb-20">
-          <SectionLabel light>Depoimentos</SectionLabel>
-          <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold text-white">
-            O que líderes dizem sobre o look.me
-          </h2>
-        </AnimatedText>
-        
-        <div className="grid md:grid-cols-3 gap-6">
-          {testimonials.map((testimonial, index) => (
-            <AnimatedText key={index} delay={index * 0.1}>
-              <div className="p-6 md:p-8 rounded-3xl bg-white/10 border border-white/20 h-full flex flex-col">
-                <Quote className="w-10 h-10 text-white/30 mb-4" />
-                <p className="text-white/90 text-lg mb-6 leading-relaxed flex-grow">
-                  "{testimonial.quote}"
-                </p>
-                <div>
-                  <p className="text-white font-semibold">{testimonial.author}</p>
-                  <p className="text-white/60 text-sm">{testimonial.role}</p>
-                  <p className="text-white/40 text-sm">{testimonial.company}</p>
-                </div>
-              </div>
-            </AnimatedText>
-          ))}
-        </div>
-      </div>
-    </section>
-  )
-}
-
-// ============================================
 // INTEGRATIONS
 // ============================================
 function Integrations() {
@@ -1000,29 +907,6 @@ function Footer() {
 }
 
 // ============================================
-// WHATSAPP BUTTON
-// ============================================
-function WhatsAppButton() {
-  return (
-    <motion.a
-      href="https://wa.me/5511999999999?text=Olá! Gostaria de saber mais sobre o look.me"
-      target="_blank"
-      rel="noopener noreferrer"
-      initial={{ scale: 0, opacity: 0 }}
-      animate={{ scale: 1, opacity: 1 }}
-      transition={{ delay: 2, type: "spring", stiffness: 200 }}
-      whileHover={{ scale: 1.1 }}
-      whileTap={{ scale: 0.95 }}
-      className="fixed bottom-6 right-6 z-50 w-14 h-14 md:w-16 md:h-16 bg-green-500 rounded-full flex items-center justify-center shadow-lg shadow-green-500/30 hover:shadow-green-500/50 transition-shadow"
-      aria-label="Fale conosco no WhatsApp"
-    >
-      <MessageCircle className="w-7 h-7 md:w-8 md:h-8 text-white" />
-      <span className="absolute inset-0 rounded-full bg-green-500 animate-ping opacity-20" />
-    </motion.a>
-  )
-}
-
-// ============================================
 // MAIN PAGE
 // ============================================
 export default function Home() {
@@ -1030,18 +914,15 @@ export default function Home() {
     <main className="min-h-screen overflow-x-hidden">
       <Header />
       <Hero />
+      <HowItWorks />
       <VideoSection />
       <WhatWeDo />
       <Solutions />
       <ImpactROI />
-      <HowItWorks />
       <WhatMakesUsUnique />
-      <Clients />
-      <Testimonials />
       <Integrations />
       <FinalCTA />
       <Footer />
-      <WhatsAppButton />
     </main>
   )
 }
