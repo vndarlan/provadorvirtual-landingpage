@@ -80,7 +80,20 @@
 
 ## Decisões
 
-*(registrar aqui cada decisão importante)*
+### 2026-02-06: Modelo de Integração
+- **Escolhido:** Widget JavaScript Universal com Data Attributes
+- **Por quê:** Funciona em qualquer plataforma (Shopify, WooCommerce, VTEX, Nuvemshop, custom)
+- **Como funciona:**
+  1. Lojista adiciona `<div id="lookme-widget" data-product-image="...">` na página de produto
+  2. Inclui script `<script src="https://cdn.lookme.ai/widget.js?key=API_KEY">`
+  3. Widget injeta botão "Experimentar Virtualmente"
+  4. Cliente clica → modal abre → upload foto → API processa → resultado
+- **Documentação:** `docs/INTEGRATION.md`
+
+### 2026-02-06: Identidade Visual
+- Mudança de dark theme (violet) para red/white (estilo Seedream)
+- Paleta: #E31B23 (vermelho), #FFFFFF (branco), #FAFAFA (off-white)
+- Seções alternam entre fundo vermelho e branco
 
 ---
 
