@@ -754,10 +754,10 @@ function WhatMakesUsUnique() {
 // ============================================
 function Integrations() {
   const integrations = [
-    { name: 'Shopify', logo: '/logos/shopify.svg' },
-    { name: 'Nuvemshop', logo: '/logos/nuvemshop.svg' },
-    { name: 'VTEX', logo: '/logos/vtex.svg' },
-    { name: 'Código Próprio', icon: Code2 },
+    { name: 'Shopify', icon: Store, color: 'text-green-600' },
+    { name: 'Nuvemshop', icon: Globe, color: 'text-violet-600' },
+    { name: 'VTEX', icon: Box, color: 'text-pink-600' },
+    { name: 'Código Próprio', icon: Code2, color: 'text-gray-600' },
   ]
   
   return (
@@ -773,24 +773,14 @@ function Integrations() {
           </p>
         </AnimatedText>
         
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-16 max-w-4xl mx-auto">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-16 max-w-3xl mx-auto">
           {integrations.map((integration, index) => (
             <AnimatedText key={index} delay={index * 0.05}>
-              <div className="group p-6 rounded-2xl bg-backgroundAlt border border-black/5 hover:border-primary/20 transition-all text-center hover:-translate-y-1 hover:shadow-soft flex items-center justify-center min-h-[100px]">
-                {integration.logo ? (
-                  <img 
-                    src={integration.logo} 
-                    alt={integration.name} 
-                    className="h-10 md:h-12 w-auto max-w-full object-contain"
-                  />
-                ) : (
-                  <div className="flex flex-col items-center gap-2">
-                    <div className="w-12 h-12 rounded-xl bg-white border border-black/5 flex items-center justify-center group-hover:border-primary/20 transition-all">
-                      {integration.icon && <integration.icon className="w-6 h-6 text-textMuted group-hover:text-primary transition-colors" />}
-                    </div>
-                    <p className="text-textDark font-medium text-sm">{integration.name}</p>
-                  </div>
-                )}
+              <div className="group p-6 rounded-2xl bg-backgroundAlt border border-black/5 hover:border-primary/20 transition-all text-center hover:-translate-y-1 hover:shadow-soft">
+                <div className="w-14 h-14 rounded-xl bg-white border border-black/5 flex items-center justify-center mx-auto mb-3 group-hover:border-primary/20 transition-all">
+                  <integration.icon className={`w-7 h-7 ${integration.color}`} />
+                </div>
+                <p className="text-textDark font-semibold">{integration.name}</p>
               </div>
             </AnimatedText>
           ))}
