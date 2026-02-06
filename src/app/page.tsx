@@ -90,13 +90,12 @@ function Header() {
         transition={{ duration: 0.8, delay: 0.2 }}
         className="fixed top-0 left-0 right-0 z-50"
       >
-        <div className="mx-4 md:mx-6 mt-4">
-          <div className={`max-w-7xl mx-auto px-4 md:px-6 py-4 rounded-2xl transition-all duration-300 ${
-            scrolled 
-              ? 'bg-white/90 backdrop-blur-xl shadow-soft border border-black/5' 
-              : 'bg-white/10 backdrop-blur-xl border border-white/20'
-          }`}>
-            <div className="flex items-center justify-between">
+        <div className={`w-full px-4 md:px-8 lg:px-12 py-4 transition-all duration-300 ${
+          scrolled 
+            ? 'bg-white/95 backdrop-blur-xl shadow-soft border-b border-black/5' 
+            : 'bg-transparent'
+        }`}>
+          <div className="max-w-7xl mx-auto flex items-center justify-between w-full">
               <a href="/" className="flex items-center gap-3">
                 <div className="w-10 h-10 rounded-xl bg-primary flex items-center justify-center shadow-lg shadow-primary/25">
                   <Eye className="w-5 h-5 text-white" />
@@ -147,7 +146,6 @@ function Header() {
                   {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
                 </button>
               </div>
-            </div>
           </div>
         </div>
       </motion.header>
