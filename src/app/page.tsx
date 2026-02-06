@@ -1,6 +1,6 @@
 'use client'
 
-import { useRef, useState } from 'react'
+import { useRef, useState, useEffect } from 'react'
 import { motion, useScroll, useTransform, useInView, AnimatePresence } from 'framer-motion'
 import { 
   ArrowRight, 
@@ -30,8 +30,29 @@ import {
   Menu,
   X,
   MessageCircle,
-  Quote
+  Quote,
+  Zap,
+  Lock,
+  Headphones,
+  Target,
+  BarChart3,
+  Clock,
+  Plus
 } from 'lucide-react'
+
+// ============================================
+// SECTION LABEL COMPONENT (estilo Veesual)
+// ============================================
+function SectionLabel({ children, light = false }: { children: string, light?: boolean }) {
+  return (
+    <div className={`flex items-center gap-2 mb-4 ${light ? 'text-white/80' : 'text-primary'}`}>
+      <Plus className="w-4 h-4" />
+      <span className="text-sm font-semibold tracking-widest uppercase">
+        {children}
+      </span>
+    </div>
+  )
+}
 
 // ============================================
 // ANIMATED TEXT COMPONENT
@@ -62,22 +83,53 @@ function AnimatedText({
 }
 
 // ============================================
+// ANIMATED COUNTER
+// ============================================
+function AnimatedCounter({ value, suffix = '' }: { value: number, suffix?: string }) {
+  const ref = useRef(null)
+  const isInView = useInView(ref, { once: true })
+  const [count, setCount] = useState(0)
+  
+  useEffect(() => {
+    if (isInView) {
+      const duration = 2000
+      const steps = 60
+      const increment = value / steps
+      let current = 0
+      
+      const timer = setInterval(() => {
+        current += increment
+        if (current >= value) {
+          setCount(value)
+          clearInterval(timer)
+        } else {
+          setCount(Math.floor(current))
+        }
+      }, duration / steps)
+      
+      return () => clearInterval(timer)
+    }
+  }, [isInView, value])
+  
+  return <span ref={ref}>{count}{suffix}</span>
+}
+
+// ============================================
 // HEADER
 // ============================================
 function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
   
-  // Track scroll for header background
-  if (typeof window !== 'undefined') {
-    window.addEventListener('scroll', () => {
-      setScrolled(window.scrollY > 50)
-    })
-  }
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 50)
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
   
   const navLinks = [
-    { href: '#demo', label: 'Como Funciona' },
-    { href: '#beneficios', label: 'Benefícios' },
+    { href: '#solucoes', label: 'Soluções' },
+    { href: '#como-funciona', label: 'Como Funciona' },
     { href: '#integracoes', label: 'Integrações' },
     { href: '#contato', label: 'Contato' },
   ]
@@ -96,56 +148,58 @@ function Header() {
             : 'bg-transparent'
         }`}>
           <div className="max-w-7xl mx-auto flex items-center justify-between w-full">
-              <a href="/" className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-xl bg-primary flex items-center justify-center shadow-lg shadow-primary/25">
-                  <Eye className="w-5 h-5 text-white" />
-                </div>
-                <span className={`text-xl md:text-2xl font-bold ${scrolled ? 'text-textDark' : 'text-white'}`}>
-                  look.me
-                </span>
+            <a href="/" className="flex items-center gap-3">
+              <div className={`w-10 h-10 rounded-xl flex items-center justify-center shadow-lg ${
+                scrolled ? 'bg-primary shadow-primary/25' : 'bg-white shadow-white/25'
+              }`}>
+                <Eye className={`w-5 h-5 ${scrolled ? 'text-white' : 'text-primary'}`} />
+              </div>
+              <span className={`text-xl md:text-2xl font-bold ${scrolled ? 'text-textDark' : 'text-white'}`}>
+                look.me
+              </span>
+            </a>
+            
+            <nav className="hidden md:flex items-center gap-8">
+              {navLinks.map(link => (
+                <a 
+                  key={link.href} 
+                  href={link.href} 
+                  className={`transition-colors text-sm font-medium ${
+                    scrolled 
+                      ? 'text-textDark/60 hover:text-primary' 
+                      : 'text-white/80 hover:text-white'
+                  }`}
+                >
+                  {link.label}
+                </a>
+              ))}
+            </nav>
+            
+            <div className="flex items-center gap-3">
+              <a 
+                href="#contato" 
+                className={`hidden sm:flex group items-center gap-2 px-5 py-2.5 rounded-full font-semibold text-sm transition-all ${
+                  scrolled
+                    ? 'bg-primary text-white hover:bg-primaryDark'
+                    : 'bg-white text-primary hover:bg-white/90'
+                }`}
+              >
+                Solicitar Demo
+                <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
               </a>
               
-              <nav className="hidden md:flex items-center gap-8">
-                {navLinks.map(link => (
-                  <a 
-                    key={link.href} 
-                    href={link.href} 
-                    className={`transition-colors text-sm font-medium ${
-                      scrolled 
-                        ? 'text-textDark/60 hover:text-primary' 
-                        : 'text-white/80 hover:text-white'
-                    }`}
-                  >
-                    {link.label}
-                  </a>
-                ))}
-              </nav>
-              
-              <div className="flex items-center gap-3">
-                <a 
-                  href="#contato" 
-                  className={`hidden sm:flex group items-center gap-2 px-5 py-2.5 rounded-full font-semibold text-sm transition-all ${
-                    scrolled
-                      ? 'bg-primary text-white hover:bg-primaryDark'
-                      : 'bg-white text-primary hover:bg-white/90'
-                  }`}
-                >
-                  Agendar Demo
-                  <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-                </a>
-                
-                <button 
-                  onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                  className={`md:hidden p-2 rounded-lg border ${
-                    scrolled 
-                      ? 'bg-white border-black/10 text-textDark' 
-                      : 'bg-white/10 border-white/20 text-white'
-                  }`}
-                  aria-label="Menu"
-                >
-                  {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-                </button>
-              </div>
+              <button 
+                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                className={`md:hidden p-2 rounded-lg border ${
+                  scrolled 
+                    ? 'bg-white border-black/10 text-textDark' 
+                    : 'bg-white/10 border-white/20 text-white'
+                }`}
+                aria-label="Menu"
+              >
+                {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+              </button>
+            </div>
           </div>
         </div>
       </motion.header>
@@ -177,7 +231,7 @@ function Header() {
                   onClick={() => setMobileMenuOpen(false)}
                   className="flex items-center justify-center gap-2 px-6 py-3 bg-primary text-white rounded-full font-semibold mt-2 hover:bg-primaryDark transition-colors"
                 >
-                  Agendar Demo Gratuita
+                  Solicitar Demonstração
                   <ArrowRight className="w-4 h-4" />
                 </a>
               </nav>
@@ -190,7 +244,7 @@ function Header() {
 }
 
 // ============================================
-// HERO SECTION - RED BACKGROUND
+// HERO SECTION
 // ============================================
 function Hero() {
   const ref = useRef(null)
@@ -207,28 +261,17 @@ function Hero() {
     <section ref={ref} className="relative min-h-screen flex items-start pt-32 md:pt-40 justify-center overflow-hidden bg-primary">
       {/* Decorative elements */}
       <div className="absolute inset-0">
-        {/* Gradient overlay */}
         <div className="absolute inset-0 bg-gradient-to-b from-primaryDark/20 via-transparent to-primaryDark/30" />
-        
-        {/* Glowing orbs */}
         <motion.div 
-          animate={{ 
-            scale: [1, 1.2, 1],
-            opacity: [0.2, 0.4, 0.2]
-          }}
+          animate={{ scale: [1, 1.2, 1], opacity: [0.2, 0.4, 0.2] }}
           transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
           className="absolute top-1/4 left-1/4 w-[600px] h-[600px] bg-white/10 rounded-full blur-[150px]" 
         />
         <motion.div 
-          animate={{ 
-            scale: [1.2, 1, 1.2],
-            opacity: [0.15, 0.3, 0.15]
-          }}
+          animate={{ scale: [1.2, 1, 1.2], opacity: [0.15, 0.3, 0.15] }}
           transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
           className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-white/10 rounded-full blur-[150px]" 
         />
-        
-        {/* Grid pattern */}
         <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:100px_100px]" />
       </div>
       
@@ -252,10 +295,10 @@ function Hero() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.4 }}
-          className="text-6xl md:text-8xl lg:text-9xl font-bold mb-6 tracking-tight text-white"
+          className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 tracking-tight text-white leading-tight"
         >
-          <span className="text-glow-white">look</span>
-          <span className="text-white/80">.me</span>
+          A experiência de IA visual que<br/>
+          <span className="text-white/80">seu e-commerce precisa</span>
         </motion.h1>
         
         {/* Subtitle */}
@@ -263,74 +306,40 @@ function Hero() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.5 }}
-          className="text-xl md:text-2xl text-white/80 mb-4 font-light"
+          className="text-lg md:text-xl text-white/70 mb-12 max-w-2xl mx-auto"
         >
-          O provador oficial do seu e-commerce.
+          Provador virtual inteligente. Mais conversão. Menos devolução.<br/>
+          Resultados incomparáveis.
         </motion.p>
         
-        {/* Description */}
-        <motion.p
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.6 }}
-          className="text-lg md:text-xl text-white/60 mb-12 max-w-2xl mx-auto"
-        >
-          Deixe seu cliente experimentar antes de comprar.<br/>
-          Aumente conversão. Reduza devolução.
-        </motion.p>
-        
-        {/* CTAs */}
+        {/* CTA */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.7 }}
-          className="flex flex-col sm:flex-row items-center justify-center gap-4"
+          transition={{ duration: 0.8, delay: 0.6 }}
         >
           <a 
             href="#contato"
-            className="group relative flex items-center gap-3 px-8 py-4 bg-white rounded-full text-primary font-semibold text-lg overflow-hidden transition-all hover:shadow-glow-white hover:scale-105"
+            className="group inline-flex items-center gap-3 px-8 py-4 bg-white rounded-full text-primary font-semibold text-lg overflow-hidden transition-all hover:shadow-glow-white hover:scale-105"
           >
-            <span className="relative z-10">Agendar Demo</span>
-            <ArrowRight className="w-5 h-5 relative z-10 group-hover:translate-x-1 transition-transform" />
-          </a>
-          <a 
-            href="#demo"
-            className="group flex items-center gap-3 px-8 py-4 rounded-full border-2 border-white/30 text-white font-medium hover:bg-white/10 hover:border-white/50 transition-all"
-          >
-            <Play className="w-5 h-5" />
-            Ver demonstração
+            Solicite uma demonstração
+            <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
           </a>
         </motion.div>
       </motion.div>
       
-      {/* Video showcase at bottom */}
+      {/* Video/Models showcase at bottom */}
       <motion.div
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1, delay: 1 }}
-        className="absolute bottom-0 left-0 right-0 h-[40vh] md:h-[50vh] overflow-hidden"
+        className="absolute bottom-0 left-0 right-0 h-[35vh] md:h-[40vh] overflow-hidden"
       >
-        {/* Gradient overlay on top of video */}
         <div className="absolute inset-0 bg-gradient-to-b from-primary via-primary/50 to-transparent z-10 pointer-events-none" />
         
-        {/* Video element - replace src with your actual video */}
-        <video
-          autoPlay
-          loop
-          muted
-          playsInline
-          className="w-full h-full object-cover object-top"
-          poster="/video-poster.jpg"
-        >
-          {/* Replace with your video URL */}
-          <source src="/demo-models.mp4" type="video/mp4" />
-          {/* Fallback for browsers that don't support video */}
-        </video>
-        
-        {/* Placeholder overlay - remove when you have the real video */}
+        {/* Placeholder for video/models */}
         <div className="absolute inset-0 bg-gradient-to-t from-white via-gray-100 to-gray-200 flex items-end justify-center pb-8">
           <div className="flex gap-4 md:gap-8 items-end">
-            {/* Placeholder silhouettes */}
             {[1, 2, 3, 4, 5].map((i) => (
               <motion.div
                 key={i}
@@ -343,14 +352,10 @@ function Hero() {
                   'w-14 md:w-20 h-40 md:h-48'
                 }`}
               >
-                {/* Head */}
                 <div className="w-8 md:w-12 h-8 md:h-12 bg-gray-300 rounded-full mx-auto -mt-4 md:-mt-6" />
               </motion.div>
             ))}
           </div>
-          <p className="absolute bottom-4 text-gray-500 text-sm">
-            Adicione seu vídeo em <code className="bg-gray-200 px-2 py-1 rounded">/public/demo-models.mp4</code>
-          </p>
         </div>
       </motion.div>
       
@@ -359,15 +364,14 @@ function Hero() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.5 }}
-        className="absolute bottom-[42vh] md:bottom-[52vh] left-1/2 -translate-x-1/2 z-20"
+        className="absolute bottom-[37vh] md:bottom-[42vh] left-1/2 -translate-x-1/2 z-20"
       >
         <motion.div
           animate={{ y: [0, 10, 0] }}
           transition={{ duration: 2, repeat: Infinity }}
           className="flex flex-col items-center gap-2 text-white/70"
         >
-          <span className="text-xs uppercase tracking-widest">Scroll</span>
-          <ChevronDown className="w-5 h-5" />
+          <ChevronDown className="w-6 h-6" />
         </motion.div>
       </motion.div>
     </section>
@@ -375,34 +379,79 @@ function Hero() {
 }
 
 // ============================================
-// STATS SECTION - WHITE BACKGROUND
+// VIDEO SECTION (COMECE AQUI)
 // ============================================
-function Stats() {
-  const stats = [
-    { value: '70%', label: 'abandonam o carrinho', sublabel: 'por dúvida sobre o caimento', color: 'text-primary' },
-    { value: '30%', label: 'das compras devolvidas', sublabel: 'não ficou como esperado', color: 'text-primary' },
-    { value: '2.5x', label: 'mais conversão', sublabel: 'com provador virtual', color: 'text-green-600' },
+function VideoSection() {
+  return (
+    <section className="py-24 md:py-32 bg-white">
+      <div className="max-w-4xl mx-auto px-4 md:px-6 text-center">
+        <AnimatedText>
+          <SectionLabel>Comece Aqui</SectionLabel>
+          <h2 className="text-3xl md:text-5xl font-bold text-textDark mb-6">
+            2 minutos para entender<br/>como tudo funciona
+          </h2>
+          <p className="text-lg text-textMuted mb-12">
+            O que fazemos, por que importa — e como isso muda o jogo.
+          </p>
+          
+          {/* Video placeholder */}
+          <div className="relative aspect-video rounded-2xl overflow-hidden bg-backgroundAlt border border-black/5 shadow-soft-lg">
+            <div className="absolute inset-0 flex items-center justify-center">
+              <button className="group w-20 h-20 md:w-24 md:h-24 rounded-full bg-primary flex items-center justify-center shadow-lg shadow-primary/30 hover:scale-110 transition-transform">
+                <Play className="w-8 h-8 md:w-10 md:h-10 text-white ml-1" fill="white" />
+              </button>
+            </div>
+            <p className="absolute bottom-4 left-1/2 -translate-x-1/2 text-textMuted text-sm">
+              Adicione seu vídeo explicativo
+            </p>
+          </div>
+        </AnimatedText>
+      </div>
+    </section>
+  )
+}
+
+// ============================================
+// O QUE FAZEMOS SECTION
+// ============================================
+function WhatWeDo() {
+  const items = [
+    {
+      icon: Sparkles,
+      title: 'Transforme Catálogos em Experiências',
+      desc: 'O look.me transforma a jornada de compra com experiências visuais interativas. Permita que seus clientes experimentem virtualmente antes de comprar.'
+    },
+    {
+      icon: TrendingUp,
+      title: 'Aumente Confiança e Conversão',
+      desc: 'Resolvemos os maiores desafios do e-commerce: menos devoluções, mais conversão, tickets maiores. Visualização personalizada gera confiança.'
+    },
+    {
+      icon: Globe,
+      title: 'Escale com Tecnologia de Ponta',
+      desc: 'Nossa tecnologia suporta catálogos grandes, públicos diversos e opera em qualquer plataforma. Integração em minutos, resultados em segundos.'
+    },
   ]
   
   return (
-    <section className="py-24 md:py-32 relative bg-white">
+    <section className="py-24 md:py-32 bg-primary">
       <div className="max-w-7xl mx-auto px-4 md:px-6">
         <AnimatedText className="text-center mb-16 md:mb-20">
-          <p className="text-primary font-medium mb-4 tracking-widest uppercase text-sm">Os números</p>
-          <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold text-textDark">
-            Por que provador virtual?
+          <SectionLabel light>O Que Fazemos</SectionLabel>
+          <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold text-white">
+            E-commerce de moda, reinventado.
           </h2>
         </AnimatedText>
         
         <div className="grid md:grid-cols-3 gap-6 md:gap-8">
-          {stats.map((stat, index) => (
+          {items.map((item, index) => (
             <AnimatedText key={index} delay={index * 0.1}>
-              <div className="group relative p-8 rounded-3xl bg-backgroundAlt border border-black/5 hover:border-primary/20 transition-all hover:-translate-y-2 hover:shadow-soft-lg">
-                <div className={`text-5xl md:text-7xl font-bold ${stat.color} mb-4`}>
-                  {stat.value}
+              <div className="p-6 md:p-8 rounded-3xl bg-white/10 border border-white/20 hover:bg-white/15 transition-all h-full">
+                <div className="w-14 h-14 rounded-2xl bg-white/20 flex items-center justify-center mb-6">
+                  <item.icon className="w-7 h-7 text-white" />
                 </div>
-                <p className="text-xl text-textDark font-medium mb-2">{stat.label}</p>
-                <p className="text-textMuted">{stat.sublabel}</p>
+                <h3 className="text-xl md:text-2xl font-bold text-white mb-4">{item.title}</h3>
+                <p className="text-white/70 leading-relaxed">{item.desc}</p>
               </div>
             </AnimatedText>
           ))}
@@ -413,9 +462,102 @@ function Stats() {
 }
 
 // ============================================
-// BEFORE/AFTER COMPARISON
+// SOLUÇÕES SECTION
 // ============================================
-function BeforeAfter() {
+function Solutions() {
+  const solutions = [
+    {
+      icon: Eye,
+      title: 'Provador Virtual',
+      desc: 'Cliente faz upload da foto e vê como ficaria com a roupa. Experiência imersiva que aumenta confiança na compra.',
+    },
+    {
+      icon: Users,
+      title: 'Modelos Diversos',
+      desc: 'Mostre seus produtos em modelos variados. Inclusividade que conecta com todos os públicos.',
+    },
+    {
+      icon: Code2,
+      title: 'Integração Simples',
+      desc: '6 linhas de código. Funciona em Shopify, WooCommerce, VTEX, Nuvemshop ou qualquer plataforma.',
+    },
+  ]
+  
+  return (
+    <section id="solucoes" className="py-24 md:py-32 bg-white">
+      <div className="max-w-7xl mx-auto px-4 md:px-6">
+        <AnimatedText className="text-center mb-16 md:mb-20">
+          <SectionLabel>Soluções</SectionLabel>
+          <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold text-textDark">
+            Impulsionando marcas a entregar<br/>jornadas visuais incríveis
+          </h2>
+        </AnimatedText>
+        
+        <div className="grid md:grid-cols-3 gap-6 md:gap-8">
+          {solutions.map((solution, index) => (
+            <AnimatedText key={index} delay={index * 0.1}>
+              <div className="group p-6 md:p-8 rounded-3xl bg-backgroundAlt border border-black/5 hover:border-primary/20 hover:shadow-soft-lg transition-all h-full">
+                <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center mb-6 group-hover:bg-primary group-hover:shadow-glow-red transition-all">
+                  <solution.icon className="w-7 h-7 text-primary group-hover:text-white transition-colors" />
+                </div>
+                <h3 className="text-xl md:text-2xl font-bold text-textDark mb-4">{solution.title}</h3>
+                <p className="text-textMuted leading-relaxed">{solution.desc}</p>
+              </div>
+            </AnimatedText>
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}
+
+// ============================================
+// IMPACTO & ROI SECTION
+// ============================================
+function ImpactROI() {
+  const stats = [
+    { value: 134, suffix: '%', label: 'Páginas visualizadas por sessão', icon: BarChart3 },
+    { value: 11, suffix: '%', label: 'Valor médio do pedido', icon: ShoppingCart },
+    { value: 93, suffix: '%', label: 'Aumento da taxa de conversão', icon: TrendingUp },
+  ]
+  
+  return (
+    <section className="py-24 md:py-32 bg-backgroundAlt">
+      <div className="max-w-7xl mx-auto px-4 md:px-6">
+        <AnimatedText className="text-center mb-16 md:mb-20">
+          <SectionLabel>Impacto e Retorno Sobre o Investimento</SectionLabel>
+          <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold text-textDark mb-6">
+            Sucesso comprovado para líderes de mercado.
+          </h2>
+          <p className="text-lg text-textMuted max-w-3xl mx-auto">
+            O look.me oferece resultados mensuráveis que diferenciam as marcas de moda.
+          </p>
+        </AnimatedText>
+        
+        <div className="grid md:grid-cols-3 gap-8 md:gap-12">
+          {stats.map((stat, index) => (
+            <AnimatedText key={index} delay={index * 0.15} className="text-center">
+              <div className="flex items-center justify-center gap-3 mb-4">
+                <span className="text-5xl md:text-7xl font-bold text-textDark">
+                  +<AnimatedCounter value={stat.value} suffix={stat.suffix} />
+                </span>
+                <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
+                  <stat.icon className="w-6 h-6 text-primary" />
+                </div>
+              </div>
+              <p className="text-lg text-textMuted">{stat.label}</p>
+            </AnimatedText>
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}
+
+// ============================================
+// COMO FUNCIONA SECTION
+// ============================================
+function HowItWorks() {
   const [sliderPosition, setSliderPosition] = useState(50)
   const containerRef = useRef<HTMLDivElement>(null)
   
@@ -427,99 +569,75 @@ function BeforeAfter() {
     setSliderPosition(percentage)
   }
   
+  const steps = [
+    { icon: Camera, step: '01', title: 'Upload da foto', desc: 'Cliente faz upload de uma foto de corpo inteiro' },
+    { icon: Wand2, step: '02', title: 'IA processa', desc: 'Nossa IA veste a roupa na pessoa em segundos' },
+    { icon: ShoppingCart, step: '03', title: 'Compra com confiança', desc: 'Visualiza o resultado e compra sem dúvidas' },
+  ]
+  
   return (
-    <div 
-      ref={containerRef}
-      className="relative aspect-[3/4] md:aspect-[4/5] max-w-md mx-auto rounded-2xl overflow-hidden cursor-ew-resize select-none border-2 border-white/30 shadow-glow-white"
-      onMouseMove={(e) => handleMove(e.clientX)}
-      onTouchMove={(e) => handleMove(e.touches[0].clientX)}
-    >
-      {/* Before - Original photo */}
-      <div className="absolute inset-0 bg-gradient-to-br from-gray-200 to-gray-300 flex items-center justify-center">
-        <div className="text-center">
-          <div className="w-32 h-32 md:w-40 md:h-40 mx-auto mb-4 rounded-full bg-gray-400/30 border-2 border-dashed border-gray-400 flex items-center justify-center">
-            <Users className="w-16 h-16 text-gray-500" />
-          </div>
-          <p className="text-gray-600 font-medium">Foto Original</p>
-        </div>
-      </div>
-      
-      {/* After - With clothing */}
-      <div 
-        className="absolute inset-0 bg-gradient-to-br from-primary to-primaryDark flex items-center justify-center"
-        style={{ clipPath: `inset(0 ${100 - sliderPosition}% 0 0)` }}
-      >
-        <div className="text-center">
-          <div className="w-32 h-32 md:w-40 md:h-40 mx-auto mb-4 rounded-full bg-white/20 border-2 border-white/40 flex items-center justify-center relative overflow-hidden">
-            <Users className="w-16 h-16 text-white" />
-            <Shirt className="w-10 h-10 text-white/80 absolute bottom-2 right-2" />
-          </div>
-          <p className="text-white font-medium">Com a Roupa</p>
-        </div>
-      </div>
-      
-      {/* Slider */}
-      <div 
-        className="absolute top-0 bottom-0 w-1 bg-white shadow-glow-white cursor-ew-resize"
-        style={{ left: `${sliderPosition}%`, transform: 'translateX(-50%)' }}
-      >
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white shadow-lg flex items-center justify-center">
-          <div className="flex gap-0.5">
-            <ChevronDown className="w-4 h-4 text-primary rotate-90" />
-            <ChevronDown className="w-4 h-4 text-primary -rotate-90" />
-          </div>
-        </div>
-      </div>
-      
-      {/* Labels */}
-      <div className="absolute bottom-4 left-4 px-3 py-1.5 rounded-full bg-black/60 backdrop-blur text-white text-xs font-medium">
-        Antes
-      </div>
-      <div className="absolute bottom-4 right-4 px-3 py-1.5 rounded-full bg-white/90 backdrop-blur text-primary text-xs font-medium">
-        Depois
-      </div>
-    </div>
-  )
-}
-
-// ============================================
-// DEMO SECTION - RED BACKGROUND
-// ============================================
-function Demo() {
-  return (
-    <section id="demo" className="py-24 md:py-32 relative overflow-hidden bg-primary">
-      {/* Decorative elements */}
-      <div className="absolute inset-0">
-        <motion.div 
-          animate={{ scale: [1, 1.2, 1], opacity: [0.1, 0.2, 0.1] }}
-          transition={{ duration: 10, repeat: Infinity }}
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-white/10 rounded-full blur-[200px]" 
-        />
-      </div>
-      
-      <div className="relative z-10 max-w-7xl mx-auto px-4 md:px-6">
+    <section id="como-funciona" className="py-24 md:py-32 bg-primary">
+      <div className="max-w-7xl mx-auto px-4 md:px-6">
         <AnimatedText className="text-center mb-16 md:mb-20">
-          <p className="text-white/80 font-medium mb-4 tracking-widest uppercase text-sm">Como funciona</p>
+          <SectionLabel light>Como Funciona</SectionLabel>
           <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold text-white mb-6">
             Simples assim
           </h2>
-          <p className="text-lg md:text-xl text-white/70 max-w-2xl mx-auto">
+          <p className="text-lg text-white/70 max-w-2xl mx-auto">
             3 passos para seu cliente experimentar qualquer peça
           </p>
         </AnimatedText>
         
-        {/* Before/After Showcase */}
+        {/* Before/After */}
         <AnimatedText className="mb-16 md:mb-20">
           <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
             <div className="order-2 md:order-1">
-              <BeforeAfter />
-              <p className="text-center text-white/50 text-sm mt-4">
-                ← Arraste para comparar →
-              </p>
+              <div 
+                ref={containerRef}
+                className="relative aspect-[3/4] max-w-sm mx-auto rounded-2xl overflow-hidden cursor-ew-resize select-none border-2 border-white/30 shadow-glow-white"
+                onMouseMove={(e) => handleMove(e.clientX)}
+                onTouchMove={(e) => handleMove(e.touches[0].clientX)}
+              >
+                <div className="absolute inset-0 bg-gradient-to-br from-gray-200 to-gray-300 flex items-center justify-center">
+                  <div className="text-center">
+                    <div className="w-28 h-28 mx-auto mb-4 rounded-full bg-gray-400/30 border-2 border-dashed border-gray-400 flex items-center justify-center">
+                      <Users className="w-14 h-14 text-gray-500" />
+                    </div>
+                    <p className="text-gray-600 font-medium">Foto Original</p>
+                  </div>
+                </div>
+                
+                <div 
+                  className="absolute inset-0 bg-gradient-to-br from-primary to-primaryDark flex items-center justify-center"
+                  style={{ clipPath: `inset(0 ${100 - sliderPosition}% 0 0)` }}
+                >
+                  <div className="text-center">
+                    <div className="w-28 h-28 mx-auto mb-4 rounded-full bg-white/20 border-2 border-white/40 flex items-center justify-center relative">
+                      <Users className="w-14 h-14 text-white" />
+                      <Shirt className="w-8 h-8 text-white/80 absolute bottom-1 right-1" />
+                    </div>
+                    <p className="text-white font-medium">Com a Roupa</p>
+                  </div>
+                </div>
+                
+                <div 
+                  className="absolute top-0 bottom-0 w-1 bg-white shadow-glow-white"
+                  style={{ left: `${sliderPosition}%`, transform: 'translateX(-50%)' }}
+                >
+                  <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white shadow-lg flex items-center justify-center">
+                    <div className="flex gap-0.5">
+                      <ChevronDown className="w-4 h-4 text-primary rotate-90" />
+                      <ChevronDown className="w-4 h-4 text-primary -rotate-90" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <p className="text-center text-white/50 text-sm mt-4">← Arraste para comparar →</p>
             </div>
+            
             <div className="order-1 md:order-2 text-center md:text-left">
               <h3 className="text-2xl md:text-3xl font-bold text-white mb-4">
-                Resultado em <span className="text-white/80">segundos</span>
+                Resultado em segundos
               </h3>
               <p className="text-white/70 text-lg mb-6">
                 Nossa IA processa a foto do cliente e veste a roupa escolhida de forma realista, 
@@ -527,13 +645,12 @@ function Demo() {
               </p>
               <div className="flex flex-wrap gap-3 justify-center md:justify-start">
                 <span className="px-4 py-2 rounded-full bg-white/10 border border-white/20 text-white text-sm">
+                  <Zap className="w-4 h-4 inline mr-2" />
                   Processamento em 3s
                 </span>
                 <span className="px-4 py-2 rounded-full bg-white/10 border border-white/20 text-white text-sm">
+                  <Target className="w-4 h-4 inline mr-2" />
                   Alta fidelidade
-                </span>
-                <span className="px-4 py-2 rounded-full bg-white/10 border border-white/20 text-white text-sm">
-                  Qualquer roupa
                 </span>
               </div>
             </div>
@@ -541,42 +658,20 @@ function Demo() {
         </AnimatedText>
         
         {/* Steps */}
-        <div className="grid md:grid-cols-3 gap-6 md:gap-8">
-          {[
-            { 
-              icon: Camera, 
-              step: '01', 
-              title: 'Upload da foto', 
-              desc: 'Cliente faz upload de uma foto sua de corpo inteiro' 
-            },
-            { 
-              icon: Wand2, 
-              step: '02', 
-              title: 'IA processa', 
-              desc: 'Nossa IA veste a roupa na pessoa em segundos' 
-            },
-            { 
-              icon: ShoppingCart, 
-              step: '03', 
-              title: 'Compra com confiança', 
-              desc: 'Visualiza o resultado e compra sem dúvidas' 
-            },
-          ].map((item, index) => (
+        <div className="grid md:grid-cols-3 gap-6">
+          {steps.map((item, index) => (
             <AnimatedText key={index} delay={index * 0.15}>
               <div className="relative group">
                 {index < 2 && (
-                  <div className="hidden md:block absolute top-16 left-full w-full h-[2px] bg-gradient-to-r from-white/30 to-transparent" />
+                  <div className="hidden md:block absolute top-12 left-full w-full h-[2px] bg-gradient-to-r from-white/30 to-transparent" />
                 )}
-                
-                <div className="p-6 md:p-8 rounded-3xl bg-white/10 border border-white/20 hover:bg-white/15 hover:border-white/30 transition-all group-hover:-translate-y-2">
-                  <div className="flex items-center gap-4 mb-6">
-                    <div className="w-14 h-14 md:w-16 md:h-16 rounded-2xl bg-white/20 border border-white/30 flex items-center justify-center glow-white">
-                      <item.icon className="w-7 h-7 md:w-8 md:h-8 text-white" />
-                    </div>
-                    <span className="text-4xl md:text-5xl font-bold text-white/20">{item.step}</span>
+                <div className="p-6 rounded-2xl bg-white/10 border border-white/20 hover:bg-white/15 transition-all text-center">
+                  <div className="w-14 h-14 rounded-xl bg-white/20 flex items-center justify-center mx-auto mb-4">
+                    <item.icon className="w-7 h-7 text-white" />
                   </div>
-                  <h3 className="text-xl md:text-2xl font-bold text-white mb-3">{item.title}</h3>
-                  <p className="text-white/60">{item.desc}</p>
+                  <span className="text-white/30 text-sm font-bold">{item.step}</span>
+                  <h3 className="text-lg font-bold text-white mt-2 mb-2">{item.title}</h3>
+                  <p className="text-white/60 text-sm">{item.desc}</p>
                 </div>
               </div>
             </AnimatedText>
@@ -588,67 +683,58 @@ function Demo() {
 }
 
 // ============================================
-// BENEFITS SECTION - WHITE BACKGROUND
+// O QUE NOS TORNA ÚNICOS
 // ============================================
-function Benefits() {
-  const benefits = [
+function WhatMakesUsUnique() {
+  const items = [
     {
-      icon: TrendingUp,
-      title: 'Aumente Conversão',
-      value: '+40%',
-      desc: 'Clientes que experimentam virtualmente convertem muito mais',
+      icon: Target,
+      title: 'Mais do que imagens, oferecemos experiências.',
+      desc: 'Nosso valor reside não apenas em gerar imagens de produtos em modelos, mas em criar experiências imersivas que dão vida a esses elementos visuais.',
     },
     {
-      icon: RotateCcw,
-      title: 'Reduza Devoluções',
-      value: '-30%',
-      desc: 'Expectativa alinhada = menos trocas e devoluções',
+      icon: Layers,
+      title: 'Precisão de Caimento e Tamanho',
+      desc: 'Nosso motor de geração de imagens usa dados precisos de tamanho para cada peça em todos os tamanhos, garantindo visuais que correspondem perfeitamente às dimensões reais dos seus produtos.',
     },
     {
-      icon: Users,
-      title: 'Engaje Clientes',
-      value: '5x',
-      desc: 'Mais tempo no site, mais interação, mais vendas',
-    },
-    {
-      icon: Star,
-      title: 'Experiência Premium',
-      value: '★★★★★',
-      desc: 'Tecnologia que encanta e diferencia seu e-commerce',
+      icon: Sparkles,
+      title: 'Qualidade de Imagem Incomparável',
+      desc: 'Utilizando processos avançados de geração, entregamos visuais com iluminação excepcional, caimento e representação de materiais, garantindo uma experiência visual ideal.',
     },
   ]
   
   return (
-    <section id="beneficios" className="py-24 md:py-32 relative bg-backgroundAlt">
+    <section className="py-24 md:py-32 bg-backgroundAlt">
       <div className="max-w-7xl mx-auto px-4 md:px-6">
-        <AnimatedText className="text-center mb-16 md:mb-20">
-          <p className="text-primary font-medium mb-4 tracking-widest uppercase text-sm">Benefícios</p>
-          <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold text-textDark mb-6">
-            Por que escolher o look.me?
-          </h2>
-        </AnimatedText>
-        
-        <div className="grid md:grid-cols-2 gap-6">
-          {benefits.map((benefit, index) => (
-            <AnimatedText key={index} delay={index * 0.1}>
-              <div className="group relative p-6 md:p-8 rounded-3xl bg-white border border-black/5 hover:border-primary/20 transition-all overflow-hidden hover:shadow-soft-lg">
-                <div className="flex items-start gap-6">
-                  <div className="w-14 h-14 md:w-16 md:h-16 rounded-2xl bg-primary/10 flex items-center justify-center flex-shrink-0 group-hover:bg-primary group-hover:shadow-glow-red transition-all">
-                    <benefit.icon className="w-7 h-7 md:w-8 md:h-8 text-primary group-hover:text-white transition-colors" />
-                  </div>
-                  <div className="flex-1">
-                    <div className="flex items-baseline gap-3 mb-2">
-                      <h3 className="text-xl md:text-2xl font-bold text-textDark">{benefit.title}</h3>
-                      <span className="text-lg md:text-xl font-bold text-primary">
-                        {benefit.value}
-                      </span>
-                    </div>
-                    <p className="text-textMuted">{benefit.desc}</p>
-                  </div>
+        <div className="grid lg:grid-cols-2 gap-12 items-start">
+          <AnimatedText>
+            <SectionLabel>O Que Nos Torna Únicos</SectionLabel>
+            <h2 className="text-3xl md:text-5xl font-bold text-textDark mb-8">
+              Estabelecendo novos padrões em IA para a moda
+            </h2>
+            <a 
+              href="#contato"
+              className="inline-flex items-center gap-2 px-6 py-3 bg-primary text-white rounded-full font-semibold hover:bg-primaryDark transition-colors"
+            >
+              Solicite uma demonstração
+              <ArrowRight className="w-4 h-4" />
+            </a>
+          </AnimatedText>
+          
+          <div className="space-y-6">
+            {items.map((item, index) => (
+              <AnimatedText key={index} delay={index * 0.1}>
+                <div className="p-6 rounded-2xl bg-white border border-black/5 hover:shadow-soft transition-all">
+                  <h3 className="text-xl font-bold text-textDark mb-3 flex items-start gap-3">
+                    <item.icon className="w-6 h-6 text-primary flex-shrink-0 mt-1" />
+                    {item.title}
+                  </h3>
+                  <p className="text-textMuted leading-relaxed pl-9">{item.desc}</p>
                 </div>
-              </div>
-            </AnimatedText>
-          ))}
+              </AnimatedText>
+            ))}
+          </div>
         </div>
       </div>
     </section>
@@ -656,59 +742,86 @@ function Benefits() {
 }
 
 // ============================================
-// TESTIMONIALS - RED BACKGROUND
+// CLIENTES (LOGOS)
+// ============================================
+function Clients() {
+  return (
+    <section className="py-24 md:py-32 bg-white">
+      <div className="max-w-7xl mx-auto px-4 md:px-6">
+        <AnimatedText className="text-center mb-16">
+          <SectionLabel>Clientes</SectionLabel>
+          <h2 className="text-3xl md:text-5xl font-bold text-textDark">
+            Marcas que confiam no look.me
+          </h2>
+        </AnimatedText>
+        
+        <AnimatedText>
+          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-8">
+            {[1, 2, 3, 4, 5, 6].map((i) => (
+              <div 
+                key={i}
+                className="h-20 rounded-xl bg-backgroundAlt border border-black/5 flex items-center justify-center text-textMuted/30 font-bold"
+              >
+                LOGO {i}
+              </div>
+            ))}
+          </div>
+          <p className="text-center text-textMuted text-sm mt-8">
+            Adicione os logos dos seus clientes aqui
+          </p>
+        </AnimatedText>
+      </div>
+    </section>
+  )
+}
+
+// ============================================
+// TESTIMONIALS
 // ============================================
 function Testimonials() {
   const testimonials = [
     {
-      quote: "Depois de implementar o look.me, nossa taxa de devolução caiu 35%. Os clientes finalmente sabem o que estão comprando.",
+      quote: "Somos uma empresa focada em inclusão de tamanhos, e o look.me ajuda clientes a preverem como algo vai ficar neles. Criamos uma espécie de boneca de papel moderna com a qual os clientes podem se divertir.",
       author: "Marina Santos",
-      role: "E-commerce Manager",
+      role: "VP E-commerce",
       company: "ModaViva",
     },
     {
-      quote: "A integração levou 15 minutos. Em uma semana, já vimos aumento de 28% na conversão das páginas de produto.",
-      author: "Ricardo Almeida", 
-      role: "CTO",
-      company: "StyleBR",
+      quote: "Graças ao look.me, os pais agora podem realmente se divertir criando looks para seus filhos, e os resultados falam por si: passam mais tempo no site, exploram mais e compram mais.",
+      author: "Ricardo Almeida",
+      role: "Líder Digital",
+      company: "StyleBR Kids",
     },
     {
-      quote: "Nossos clientes adoram! O engajamento no site triplicou e o tempo médio na página de produto aumentou 4x.",
+      quote: "Implementar a tecnologia de prova virtual com IA do look.me é uma extensão natural da nossa abordagem tech-first. É um ótimo exemplo de como estamos usando IA para transformar a forma como as pessoas compram.",
       author: "Carla Mendes",
-      role: "Head of Product",
+      role: "SVP de Estratégia",
       company: "Elegance Store",
     },
   ]
   
   return (
-    <section className="py-24 md:py-32 relative overflow-hidden bg-primary">
-      <div className="absolute inset-0">
-        <motion.div 
-          animate={{ scale: [1, 1.3, 1], opacity: [0.1, 0.2, 0.1] }}
-          transition={{ duration: 12, repeat: Infinity }}
-          className="absolute top-0 right-0 w-[600px] h-[600px] bg-white/10 rounded-full blur-[200px]" 
-        />
-      </div>
-      
-      <div className="relative z-10 max-w-7xl mx-auto px-4 md:px-6">
+    <section className="py-24 md:py-32 bg-primary">
+      <div className="max-w-7xl mx-auto px-4 md:px-6">
         <AnimatedText className="text-center mb-16 md:mb-20">
-          <p className="text-white/80 font-medium mb-4 tracking-widest uppercase text-sm">Depoimentos</p>
-          <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold text-white mb-6">
-            O que nossos clientes dizem
+          <SectionLabel light>Depoimentos</SectionLabel>
+          <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold text-white">
+            O que líderes dizem sobre o look.me
           </h2>
         </AnimatedText>
         
         <div className="grid md:grid-cols-3 gap-6">
           {testimonials.map((testimonial, index) => (
             <AnimatedText key={index} delay={index * 0.1}>
-              <div className="group relative p-6 md:p-8 rounded-3xl bg-white/10 border border-white/20 hover:bg-white/15 hover:border-white/30 transition-all h-full">
+              <div className="p-6 md:p-8 rounded-3xl bg-white/10 border border-white/20 h-full flex flex-col">
                 <Quote className="w-10 h-10 text-white/30 mb-4" />
-                <p className="text-white/90 text-lg mb-6 leading-relaxed">
+                <p className="text-white/90 text-lg mb-6 leading-relaxed flex-grow">
                   "{testimonial.quote}"
                 </p>
-                <div className="mt-auto">
+                <div>
                   <p className="text-white font-semibold">{testimonial.author}</p>
-                  <p className="text-white/60 text-sm">{testimonial.role} • {testimonial.company}</p>
+                  <p className="text-white/60 text-sm">{testimonial.role}</p>
+                  <p className="text-white/40 text-sm">{testimonial.company}</p>
                 </div>
               </div>
             </AnimatedText>
@@ -720,7 +833,7 @@ function Testimonials() {
 }
 
 // ============================================
-// INTEGRATIONS - WHITE BACKGROUND
+// INTEGRATIONS
 // ============================================
 function Integrations() {
   const integrations = [
@@ -733,14 +846,14 @@ function Integrations() {
   ]
   
   return (
-    <section id="integracoes" className="py-24 md:py-32 relative bg-white">
+    <section id="integracoes" className="py-24 md:py-32 bg-white">
       <div className="max-w-7xl mx-auto px-4 md:px-6">
         <AnimatedText className="text-center mb-16 md:mb-20">
-          <p className="text-primary font-medium mb-4 tracking-widest uppercase text-sm">Integrações</p>
+          <SectionLabel>Integrações</SectionLabel>
           <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold text-textDark mb-6">
             Funciona com seu e-commerce
           </h2>
-          <p className="text-lg md:text-xl text-textMuted max-w-2xl mx-auto">
+          <p className="text-lg text-textMuted max-w-2xl mx-auto">
             Integração em menos de 10 minutos. Documentação completa. Suporte dedicado.
           </p>
         </AnimatedText>
@@ -749,7 +862,7 @@ function Integrations() {
           {integrations.map((integration, index) => (
             <AnimatedText key={index} delay={index * 0.05}>
               <div className="group p-6 rounded-2xl bg-backgroundAlt border border-black/5 hover:border-primary/20 transition-all text-center hover:-translate-y-1 hover:shadow-soft">
-                <div className="w-14 h-14 rounded-xl bg-white border border-black/5 flex items-center justify-center mx-auto mb-4 group-hover:border-primary/20 group-hover:shadow-soft transition-all">
+                <div className="w-14 h-14 rounded-xl bg-white border border-black/5 flex items-center justify-center mx-auto mb-4 group-hover:border-primary/20 transition-all">
                   <integration.icon className="w-7 h-7 text-textMuted group-hover:text-primary transition-colors" />
                 </div>
                 <p className="text-textDark font-medium">{integration.name}</p>
@@ -769,8 +882,6 @@ function Integrations() {
                   <div className="w-3 h-3 rounded-full bg-green-500" />
                 </div>
                 <span className="text-white/60 text-sm font-mono">integração.html</span>
-                <div className="flex-1" />
-                <Cpu className="w-4 h-4 text-primary" />
               </div>
               <pre className="p-6 overflow-x-auto">
                 <code className="text-sm leading-relaxed">
@@ -808,18 +919,14 @@ function Integrations() {
 }
 
 // ============================================
-// FINAL CTA - RED BACKGROUND
+// FINAL CTA
 // ============================================
 function FinalCTA() {
   return (
     <section id="contato" className="py-24 md:py-32 relative overflow-hidden bg-primary">
-      {/* Background */}
       <div className="absolute inset-0">
         <motion.div 
-          animate={{ 
-            scale: [1, 1.3, 1],
-            opacity: [0.15, 0.3, 0.15]
-          }}
+          animate={{ scale: [1, 1.3, 1], opacity: [0.15, 0.3, 0.15] }}
           transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
           className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-white/10 rounded-full blur-[200px]" 
         />
@@ -827,18 +934,18 @@ function FinalCTA() {
       
       <div className="relative z-10 max-w-4xl mx-auto px-4 md:px-6 text-center">
         <AnimatedText>
-          <h2 className="text-3xl md:text-5xl lg:text-7xl font-bold text-white mb-6">
-            Pronto para transformar<br/>seu e-commerce?
+          <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold text-white mb-6">
+            Potencialize sua marca com o look.me
           </h2>
           <p className="text-lg md:text-xl text-white/70 mb-12 max-w-2xl mx-auto">
-            Agende uma demonstração gratuita e veja o look.me funcionando na sua loja.
+            Agende uma demonstração gratuita e veja como podemos transformar seu e-commerce.
           </p>
           
           <a 
             href="mailto:contato@lookme.ai"
             className="group inline-flex items-center gap-3 px-10 py-5 bg-white text-primary rounded-full font-bold text-lg hover:shadow-glow-white transition-all hover:scale-105"
           >
-            Agendar Demo Gratuita
+            Solicitar Demonstração
             <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
           </a>
           
@@ -863,7 +970,7 @@ function FinalCTA() {
 }
 
 // ============================================
-// FOOTER - DARK
+// FOOTER
 // ============================================
 function Footer() {
   return (
@@ -878,7 +985,7 @@ function Footer() {
           </div>
           
           <p className="text-white/50 text-sm">
-            © 2026 look.me • O provador oficial do seu e-commerce
+            © 2026 look.me • A experiência de IA visual para e-commerce
           </p>
           
           <div className="flex items-center gap-6">
@@ -893,7 +1000,7 @@ function Footer() {
 }
 
 // ============================================
-// WHATSAPP FLOATING BUTTON
+// WHATSAPP BUTTON
 // ============================================
 function WhatsAppButton() {
   return (
@@ -923,9 +1030,13 @@ export default function Home() {
     <main className="min-h-screen overflow-x-hidden">
       <Header />
       <Hero />
-      <Stats />
-      <Demo />
-      <Benefits />
+      <VideoSection />
+      <WhatWeDo />
+      <Solutions />
+      <ImpactROI />
+      <HowItWorks />
+      <WhatMakesUsUnique />
+      <Clients />
       <Testimonials />
       <Integrations />
       <FinalCTA />
