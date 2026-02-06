@@ -204,7 +204,7 @@ function Hero() {
   const scale = useTransform(scrollYProgress, [0, 0.5], [1, 0.9])
   
   return (
-    <section ref={ref} className="relative min-h-screen flex items-center justify-center overflow-hidden bg-primary">
+    <section ref={ref} className="relative min-h-screen flex items-start pt-32 md:pt-40 justify-center overflow-hidden bg-primary">
       {/* Decorative elements */}
       <div className="absolute inset-0">
         {/* Gradient overlay */}
@@ -303,17 +303,68 @@ function Hero() {
         </motion.div>
       </motion.div>
       
+      {/* Video showcase at bottom */}
+      <motion.div
+        initial={{ opacity: 0, y: 50 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1, delay: 1 }}
+        className="absolute bottom-0 left-0 right-0 h-[40vh] md:h-[50vh] overflow-hidden"
+      >
+        {/* Gradient overlay on top of video */}
+        <div className="absolute inset-0 bg-gradient-to-b from-primary via-primary/50 to-transparent z-10 pointer-events-none" />
+        
+        {/* Video element - replace src with your actual video */}
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="w-full h-full object-cover object-top"
+          poster="/video-poster.jpg"
+        >
+          {/* Replace with your video URL */}
+          <source src="/demo-models.mp4" type="video/mp4" />
+          {/* Fallback for browsers that don't support video */}
+        </video>
+        
+        {/* Placeholder overlay - remove when you have the real video */}
+        <div className="absolute inset-0 bg-gradient-to-t from-white via-gray-100 to-gray-200 flex items-end justify-center pb-8">
+          <div className="flex gap-4 md:gap-8 items-end">
+            {/* Placeholder silhouettes */}
+            {[1, 2, 3, 4, 5].map((i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 1.2 + i * 0.1 }}
+                className={`bg-gradient-to-t from-gray-400 to-gray-300 rounded-t-full ${
+                  i === 3 ? 'w-20 md:w-28 h-48 md:h-64' : 
+                  i === 2 || i === 4 ? 'w-16 md:w-24 h-44 md:h-56' : 
+                  'w-14 md:w-20 h-40 md:h-48'
+                }`}
+              >
+                {/* Head */}
+                <div className="w-8 md:w-12 h-8 md:h-12 bg-gray-300 rounded-full mx-auto -mt-4 md:-mt-6" />
+              </motion.div>
+            ))}
+          </div>
+          <p className="absolute bottom-4 text-gray-500 text-sm">
+            Adicione seu vídeo em <code className="bg-gray-200 px-2 py-1 rounded">/public/demo-models.mp4</code>
+          </p>
+        </div>
+      </motion.div>
+      
       {/* Scroll indicator */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.5 }}
-        className="absolute bottom-10 left-1/2 -translate-x-1/2"
+        className="absolute bottom-[42vh] md:bottom-[52vh] left-1/2 -translate-x-1/2 z-20"
       >
         <motion.div
           animate={{ y: [0, 10, 0] }}
           transition={{ duration: 2, repeat: Infinity }}
-          className="flex flex-col items-center gap-2 text-white/50"
+          className="flex flex-col items-center gap-2 text-white/70"
         >
           <span className="text-xs uppercase tracking-widest">Scroll</span>
           <ChevronDown className="w-5 h-5" />
