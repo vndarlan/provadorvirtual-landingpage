@@ -293,18 +293,28 @@ function Hero() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.4 }}
-          className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 tracking-tight text-white leading-tight"
+          className="text-4xl md:text-6xl lg:text-7xl font-bold mb-4 tracking-tight text-white leading-tight"
         >
           A experiência de IA visual que<br/>
           <span className="text-white/80">seu e-commerce precisa</span>
         </motion.h1>
         
-        {/* Subtitle */}
+        {/* Slogan */}
         <motion.p
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.5 }}
-          className="text-lg md:text-xl text-white/70 mb-12 max-w-2xl mx-auto"
+          className="text-xl md:text-2xl text-white font-medium mb-4"
+        >
+          O provador oficial do seu e-commerce.
+        </motion.p>
+        
+        {/* Subtitle */}
+        <motion.p
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.6 }}
+          className="text-base md:text-lg text-white/60 mb-12 max-w-2xl mx-auto"
         >
           A experiência da loja física no digital.<br/>
           Ofereça a segurança do provador físico com a escalabilidade do e-commerce.
@@ -314,7 +324,7 @@ function Hero() {
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.6 }}
+          transition={{ duration: 0.8, delay: 0.7 }}
         >
           <a 
             href="#contato"
