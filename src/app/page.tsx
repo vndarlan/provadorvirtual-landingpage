@@ -680,26 +680,7 @@ function HowItWorks() {
           </div>
         </AnimatedText>
         
-        {/* Steps - 3 passos */}
-        <div className="grid md:grid-cols-3 gap-6">
-          {steps.map((item, index) => (
-            <AnimatedText key={index} delay={index * 0.15}>
-              <div className="relative group">
-                {index < 2 && (
-                  <div className="hidden md:block absolute top-12 left-full w-full h-[2px] bg-gradient-to-r from-white/30 to-transparent" />
-                )}
-                <div className="p-6 rounded-2xl bg-white/10 border border-white/20 hover:bg-white/15 transition-all text-center">
-                  <div className="w-14 h-14 rounded-xl bg-white/20 flex items-center justify-center mx-auto mb-4">
-                    <item.icon className="w-7 h-7 text-white" />
-                  </div>
-                  <span className="text-white/30 text-sm font-bold">{item.step}</span>
-                  <h3 className="text-lg font-bold text-white mt-2 mb-2">{item.title}</h3>
-                  <p className="text-white/60 text-sm">{item.desc}</p>
-                </div>
-              </div>
-            </AnimatedText>
-          ))}
-        </div>
+        {/* Catálogo + Resultado segue abaixo */}
       </div>
     </section>
   )
