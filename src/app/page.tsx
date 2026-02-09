@@ -546,7 +546,7 @@ function HowItWorks() {
   }
   
   const outfits = [
-    { before: '/demo/model-outfit1.png', after: '/demo/model-outfit2.png', label: 'Look 1 - Cardigan Mostarda' },
+    { before: '/demo/model-outfit2.png', after: '/demo/model-outfit1.png', label: 'Look 1 - Cardigan Mostarda' },
   ]
   
   const steps = [
@@ -808,9 +808,10 @@ function WhatMakesUsUnique() {
 // ============================================
 function Integrations() {
   const integrations = [
-    { name: 'Shopify', logo: '/logos/shopify.svg', isIcon: false },
-    { name: 'Nuvemshop', logo: '/logos/nuvemshop.svg', isIcon: false },
+    { name: 'Shopify', logo: '/logos/shopify.png', isIcon: false },
+    { name: 'Nuvemshop', logo: '/logos/nuvemshop.png', isIcon: false },
     { name: 'VTEX', logo: '/logos/vtex.svg', isIcon: false },
+    { name: 'WooCommerce', logo: '/logos/woocommerce.png', isIcon: false },
     { name: 'Código Próprio', logo: null, isIcon: true },
   ]
   
@@ -827,7 +828,7 @@ function Integrations() {
           </p>
         </AnimatedText>
         
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-16 max-w-4xl mx-auto">
+        <div className="grid grid-cols-2 md:grid-cols-5 gap-4 mb-16 max-w-4xl mx-auto">
           {integrations.map((integration, index) => (
             <AnimatedText key={index} delay={index * 0.05}>
               <div className="group p-6 md:p-8 rounded-2xl bg-backgroundAlt border border-black/5 hover:border-primary/20 transition-all text-center hover:-translate-y-1 hover:shadow-soft overflow-visible">
@@ -840,7 +841,7 @@ function Integrations() {
                     <img 
                       src={integration.logo!} 
                       alt={`Logo ${integration.name}`} 
-                      className="h-12 md:h-14 w-auto max-w-[140px] object-contain"
+                      className="h-12 md:h-14 w-auto max-w-[140px] object-contain rounded-xl"
                     />
                   )}
                 </div>
