@@ -13,8 +13,8 @@ export const metadata: Metadata = {
   keywords: 'provador virtual, try-on, e-commerce, moda, IA, inteligência artificial, conversão, devolução, virtual fitting room, prova virtual',
   authors: [{ name: 'look.me' }],
   icons: {
-    icon: '/favicon.svg',
-    apple: '/favicon.svg',
+    icon: '/favicon.png',
+    apple: '/favicon.png',
   },
   openGraph: {
     title: 'look.me | Provador Virtual para E-commerce',
