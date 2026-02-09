@@ -768,79 +768,129 @@ function Integrations() {
           </p>
         </AnimatedText>
         
-        <div className="relative mb-16 overflow-hidden">
-          {/* Fade edges */}
-          <div className="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-white to-transparent z-10" />
-          <div className="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-white to-transparent z-10" />
-          
-          <motion.div
-            className="flex gap-8 w-max"
-            animate={{ x: ['0%', '-50%'] }}
-            transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
-          >
-            {[...integrations, ...integrations, ...integrations, ...integrations].map((integration, index) => (
-              <div key={index} className="flex-shrink-0 group p-6 md:p-8 rounded-2xl bg-backgroundAlt border border-black/5 hover:border-primary/20 transition-all text-center hover:-translate-y-1 hover:shadow-soft">
-                <div className="h-16 md:h-20 flex items-center justify-center mx-auto mb-4">
-                  {integration.isIcon ? (
-                    <div className="w-14 h-14 rounded-xl bg-white border border-black/10 flex items-center justify-center">
-                      <Code2 className="w-8 h-8 text-gray-600" />
-                    </div>
-                  ) : (
-                    <img 
-                      src={integration.logo!} 
-                      alt={`Logo ${integration.name}`} 
-                      className="h-12 md:h-14 w-auto max-w-[140px] object-contain rounded-xl"
+        {/* Terminal + Logos orbital layout */}
+        <div className="relative max-w-5xl mx-auto mb-16">
+          <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-0">
+            
+            {/* Terminal - Left side */}
+            <motion.div 
+              initial={{ opacity: 0, x: -40 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="w-full lg:w-1/2 relative z-10"
+            >
+              <div className="rounded-2xl overflow-hidden border border-black/10 bg-textDark shadow-soft-lg">
+                <div className="flex items-center gap-3 px-6 py-4 bg-black/20 border-b border-white/10">
+                  <div className="flex gap-2">
+                    <div className="w-3 h-3 rounded-full bg-red-500" />
+                    <div className="w-3 h-3 rounded-full bg-yellow-500" />
+                    <div className="w-3 h-3 rounded-full bg-green-500" />
+                  </div>
+                  <span className="text-white/60 text-sm font-mono">integração.html</span>
+                </div>
+                <pre className="p-6 overflow-x-auto">
+                  <code className="text-sm leading-relaxed">
+                    <span className="text-primary">{'<script'}</span>{' '}
+                    <span className="text-blue-400">src</span>
+                    <span className="text-white">=</span>
+                    <span className="text-green-400">"https://cdn.lookme.ai/widget.js"</span>
+                    <span className="text-primary">{'>'}</span>
+                    <span className="text-primary">{'</script>'}</span>{'\n\n'}
+                    <span className="text-primary">{'<script>'}</span>{'\n'}
+                    {'  '}<span className="text-blue-400">LookMe</span>
+                    <span className="text-white">.</span>
+                    <span className="text-yellow-400">init</span>
+                    <span className="text-white">{'({'}</span>{'\n'}
+                    {'    '}<span className="text-blue-400">apiKey</span>
+                    <span className="text-white">: </span>
+                    <span className="text-green-400">'sua_api_key'</span>
+                    <span className="text-white">,</span>{'\n'}
+                    {'    '}<span className="text-blue-400">storeId</span>
+                    <span className="text-white">: </span>
+                    <span className="text-green-400">'sua_loja'</span>{'\n'}
+                    {'  '}<span className="text-white">{'});'}</span>{'\n'}
+                    <span className="text-primary">{'</script>'}</span>
+                  </code>
+                </pre>
+              </div>
+              <p className="text-textMuted text-sm mt-3 text-center">6 linhas de código para integrar</p>
+            </motion.div>
+
+            {/* Logos - Arc on the right */}
+            <div className="w-full lg:w-1/2 relative flex items-center justify-center" style={{ minHeight: '360px' }}>
+              {/* Connecting lines (hidden on mobile) */}
+              <svg className="absolute inset-0 w-full h-full hidden lg:block" viewBox="0 0 400 360" fill="none">
+                {integrations.filter(i => !i.isIcon).map((_, index) => {
+                  const total = integrations.filter(i => !i.isIcon).length + 1
+                  const angle = -60 + (index * 120) / (total - 2)
+                  const rad = (angle * Math.PI) / 180
+                  const endX = 200 + Math.cos(rad) * 140
+                  const endY = 180 + Math.sin(rad) * 140
+                  return (
+                    <motion.line
+                      key={index}
+                      x1="60" y1="180"
+                      x2={endX} y2={endY}
+                      stroke="#E31B23"
+                      strokeWidth="1.5"
+                      strokeDasharray="6 4"
+                      initial={{ pathLength: 0, opacity: 0 }}
+                      whileInView={{ pathLength: 1, opacity: 0.3 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.8, delay: 0.3 + index * 0.15 }}
                     />
-                  )}
-                </div>
-                <p className="text-textDark font-semibold whitespace-nowrap">{integration.name}</p>
+                  )
+                })}
+              </svg>
+              
+              {/* Logo cards in arc */}
+              <div className="relative w-full h-full flex flex-col items-center justify-center gap-4 lg:block">
+                {integrations.map((integration, index) => {
+                  const total = integrations.length
+                  const angle = -60 + (index * 120) / (total - 1)
+                  const rad = (angle * Math.PI) / 180
+                  const radius = 140
+                  const centerX = 50
+                  const centerY = 50
+                  const x = centerX + Math.cos(rad) * (radius / 4)
+                  const y = centerY + Math.sin(rad) * (radius / 4)
+                  
+                  return (
+                    <motion.div
+                      key={index}
+                      initial={{ opacity: 0, scale: 0.5 }}
+                      whileInView={{ opacity: 1, scale: 1 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.5, delay: 0.2 + index * 0.15 }}
+                      className="lg:absolute p-4 md:p-5 rounded-2xl bg-backgroundAlt border border-black/5 hover:border-primary/20 transition-all text-center hover:-translate-y-1 hover:shadow-soft"
+                      style={{
+                        left: `${x}%`,
+                        top: `${y}%`,
+                        transform: 'translate(-50%, -50%)',
+                      }}
+                    >
+                      <div className="h-12 w-12 md:h-14 md:w-14 flex items-center justify-center mx-auto mb-2">
+                        {integration.isIcon ? (
+                          <div className="w-12 h-12 rounded-xl bg-white border border-black/10 flex items-center justify-center">
+                            <Code2 className="w-6 h-6 text-gray-600" />
+                          </div>
+                        ) : (
+                          <img 
+                            src={integration.logo!} 
+                            alt={`Logo ${integration.name}`} 
+                            className="h-10 md:h-12 w-auto object-contain rounded-lg"
+                          />
+                        )}
+                      </div>
+                      <p className="text-textDark font-semibold text-sm whitespace-nowrap">{integration.name}</p>
+                    </motion.div>
+                  )
+                })}
               </div>
-            ))}
-          </motion.div>
-        </div>
-        
-        {/* Code snippet */}
-        <AnimatedText>
-          <div className="max-w-3xl mx-auto">
-            <div className="rounded-2xl overflow-hidden border border-black/10 bg-textDark shadow-soft-lg">
-              <div className="flex items-center gap-3 px-6 py-4 bg-black/20 border-b border-white/10">
-                <div className="flex gap-2">
-                  <div className="w-3 h-3 rounded-full bg-red-500" />
-                  <div className="w-3 h-3 rounded-full bg-yellow-500" />
-                  <div className="w-3 h-3 rounded-full bg-green-500" />
-                </div>
-                <span className="text-white/60 text-sm font-mono">integração.html</span>
-              </div>
-              <pre className="p-6 overflow-x-auto">
-                <code className="text-sm leading-relaxed">
-                  <span className="text-primary">{'<script'}</span>{' '}
-                  <span className="text-blue-400">src</span>
-                  <span className="text-white">=</span>
-                  <span className="text-green-400">"https://cdn.lookme.ai/widget.js"</span>
-                  <span className="text-primary">{'>'}</span>
-                  <span className="text-primary">{'</script>'}</span>{'\n\n'}
-                  <span className="text-primary">{'<script>'}</span>{'\n'}
-                  {'  '}<span className="text-blue-400">LookMe</span>
-                  <span className="text-white">.</span>
-                  <span className="text-yellow-400">init</span>
-                  <span className="text-white">{'({'}</span>{'\n'}
-                  {'    '}<span className="text-blue-400">apiKey</span>
-                  <span className="text-white">: </span>
-                  <span className="text-green-400">'sua_api_key'</span>
-                  <span className="text-white">,</span>{'\n'}
-                  {'    '}<span className="text-blue-400">storeId</span>
-                  <span className="text-white">: </span>
-                  <span className="text-green-400">'sua_loja'</span>{'\n'}
-                  {'  '}<span className="text-white">{'});'}</span>{'\n'}
-                  <span className="text-primary">{'</script>'}</span>
-                </code>
-              </pre>
             </div>
-            <p className="text-center text-textMuted text-sm mt-4">
-              Apenas 6 linhas de código para integrar
-            </p>
           </div>
-        </AnimatedText>
+        </div>
       </div>
     </section>
   )
