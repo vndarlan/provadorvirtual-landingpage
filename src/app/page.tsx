@@ -146,7 +146,8 @@ function Header() {
         }`}>
           <div className="max-w-7xl mx-auto flex items-center justify-between w-full">
             <a href="/" className="flex items-center gap-3">
-              <img src="/logo-full.png" alt="look.me" className="h-8 md:h-10 w-auto" />
+              <img src="/logo-icon.png" alt="look.me" className="h-8 w-auto md:hidden" />
+              <img src="/logo-full.png" alt="look.me" className="hidden md:block md:h-10 w-auto" />
             </a>
             
             <nav className="hidden md:flex items-center gap-8">
