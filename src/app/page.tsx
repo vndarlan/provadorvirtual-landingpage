@@ -818,76 +818,65 @@ function Integrations() {
             </motion.div>
 
             {/* Logos - Arc on the right */}
-            <div className="w-full lg:w-1/2 relative flex items-center justify-center" style={{ minHeight: '360px' }}>
-              {/* Connecting lines (hidden on mobile) */}
-              <svg className="absolute inset-0 w-full h-full hidden lg:block" viewBox="0 0 400 360" fill="none">
-                {integrations.filter(i => !i.isIcon).map((_, index) => {
-                  const total = integrations.filter(i => !i.isIcon).length + 1
-                  const angle = -60 + (index * 120) / (total - 2)
-                  const rad = (angle * Math.PI) / 180
-                  const endX = 200 + Math.cos(rad) * 140
-                  const endY = 180 + Math.sin(rad) * 140
-                  return (
-                    <motion.line
-                      key={index}
-                      x1="60" y1="180"
-                      x2={endX} y2={endY}
-                      stroke="#E31B23"
-                      strokeWidth="1.5"
-                      strokeDasharray="6 4"
-                      initial={{ pathLength: 0, opacity: 0 }}
-                      whileInView={{ pathLength: 1, opacity: 0.3 }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 0.8, delay: 0.3 + index * 0.15 }}
-                    />
-                  )
-                })}
+            <div className="w-full lg:w-1/2 relative flex items-center justify-center" style={{ minHeight: '400px' }}>
+              {/* Connecting dashed lines */}
+              <svg className="absolute inset-0 w-full h-full hidden lg:block" viewBox="0 0 400 400" fill="none">
+                {[
+                  { x: 280, y: 40 },
+                  { x: 320, y: 160 },
+                  { x: 280, y: 280 },
+                  { x: 160, y: 360 },
+                ].map((pos, i) => (
+                  <motion.line
+                    key={i}
+                    x1="40" y1="200"
+                    x2={pos.x} y2={pos.y}
+                    stroke="#E31B23"
+                    strokeWidth="1"
+                    strokeDasharray="6 4"
+                    initial={{ pathLength: 0, opacity: 0 }}
+                    whileInView={{ pathLength: 1, opacity: 0.25 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.8, delay: 0.3 + i * 0.15 }}
+                  />
+                ))}
               </svg>
               
-              {/* Logo cards in arc */}
-              <div className="relative w-full h-full flex flex-col items-center justify-center gap-4 lg:block">
-                {integrations.map((integration, index) => {
-                  const total = integrations.length
-                  const angle = -60 + (index * 120) / (total - 1)
-                  const rad = (angle * Math.PI) / 180
-                  const radius = 140
-                  const centerX = 50
-                  const centerY = 50
-                  const x = centerX + Math.cos(rad) * (radius / 4)
-                  const y = centerY + Math.sin(rad) * (radius / 4)
-                  
-                  return (
-                    <motion.div
-                      key={index}
-                      initial={{ opacity: 0, scale: 0.5 }}
-                      whileInView={{ opacity: 1, scale: 1 }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 0.5, delay: 0.2 + index * 0.15 }}
-                      className="lg:absolute p-4 md:p-5 rounded-2xl bg-backgroundAlt border border-black/5 hover:border-primary/20 transition-all text-center hover:-translate-y-1 hover:shadow-soft"
-                      style={{
-                        left: `${x}%`,
-                        top: `${y}%`,
-                        transform: 'translate(-50%, -50%)',
-                      }}
-                    >
-                      <div className="h-12 w-12 md:h-14 md:w-14 flex items-center justify-center mx-auto mb-2">
-                        {integration.isIcon ? (
-                          <div className="w-12 h-12 rounded-xl bg-white border border-black/10 flex items-center justify-center">
-                            <Code2 className="w-6 h-6 text-gray-600" />
-                          </div>
-                        ) : (
-                          <img 
-                            src={integration.logo!} 
-                            alt={`Logo ${integration.name}`} 
-                            className="h-10 md:h-12 w-auto object-contain rounded-lg"
-                          />
-                        )}
-                      </div>
-                      <p className="text-textDark font-semibold text-sm whitespace-nowrap">{integration.name}</p>
-                    </motion.div>
-                  )
-                })}
-              </div>
+              {/* Logo cards - fixed arc positions */}
+              {[
+                { pos: 'lg:top-[0%] lg:right-[5%]', delay: 0.2 },
+                { pos: 'lg:top-[30%] lg:right-[0%]', delay: 0.35 },
+                { pos: 'lg:top-[60%] lg:right-[5%]', delay: 0.5 },
+                { pos: 'lg:top-[85%] lg:right-[30%]', delay: 0.65 },
+              ].map((position, index) => {
+                const integration = integrations[index]
+                if (!integration) return null
+                return (
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, scale: 0.5 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5, delay: position.delay }}
+                    className={`relative lg:absolute ${position.pos} p-4 md:p-5 rounded-2xl bg-backgroundAlt border border-black/5 hover:border-primary/20 transition-all text-center hover:-translate-y-1 hover:shadow-soft`}
+                  >
+                    <div className="h-12 w-12 md:h-14 md:w-14 flex items-center justify-center mx-auto mb-2">
+                      {integration.isIcon ? (
+                        <div className="w-12 h-12 rounded-xl bg-white border border-black/10 flex items-center justify-center">
+                          <Code2 className="w-6 h-6 text-gray-600" />
+                        </div>
+                      ) : (
+                        <img 
+                          src={integration.logo!} 
+                          alt={`Logo ${integration.name}`} 
+                          className="h-10 md:h-12 w-auto object-contain rounded-lg"
+                        />
+                      )}
+                    </div>
+                    <p className="text-textDark font-semibold text-sm whitespace-nowrap">{integration.name}</p>
+                  </motion.div>
+                )
+              })}
             </div>
           </div>
         </div>
