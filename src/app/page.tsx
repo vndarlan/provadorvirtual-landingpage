@@ -326,26 +326,15 @@ function Hero() {
       >
         <div className="absolute inset-0 bg-gradient-to-b from-primary via-primary/50 to-transparent z-10 pointer-events-none" />
         
-        {/* Placeholder for video/models */}
-        <div className="absolute inset-0 bg-gradient-to-t from-white via-gray-100 to-gray-200 flex items-end justify-center pb-8">
-          <div className="flex gap-4 md:gap-8 items-end">
-            {[1, 2, 3, 4, 5].map((i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 1.2 + i * 0.1 }}
-                className={`bg-gradient-to-t from-gray-400 to-gray-300 rounded-t-full ${
-                  i === 3 ? 'w-20 md:w-28 h-48 md:h-64' : 
-                  i === 2 || i === 4 ? 'w-16 md:w-24 h-44 md:h-56' : 
-                  'w-14 md:w-20 h-40 md:h-48'
-                }`}
-              >
-                <div className="w-8 md:w-12 h-8 md:h-12 bg-gray-300 rounded-full mx-auto -mt-4 md:-mt-6" />
-              </motion.div>
-            ))}
-          </div>
-        </div>
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="absolute inset-0 w-full h-full object-cover"
+        >
+          <source src="/hero-video.mp4" type="video/mp4" />
+        </video>
       </motion.div>
       
       {/* Scroll indicator */}
