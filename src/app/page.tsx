@@ -810,8 +810,7 @@ function Integrations() {
   const integrations = [
     { name: 'Shopify', logo: '/logos/shopify.png', isIcon: false },
     { name: 'Nuvemshop', logo: '/logos/nuvemshop.png', isIcon: false },
-    { name: 'VTEX', logo: '/logos/vtex.svg', isIcon: false },
-    { name: 'WooCommerce', logo: '/logos/woocommerce.png', isIcon: false },
+    { name: 'VTEX', logo: '/logos/vtex.png', isIcon: false },
     { name: 'Código Próprio', logo: null, isIcon: true },
   ]
   
@@ -828,7 +827,7 @@ function Integrations() {
           </p>
         </AnimatedText>
         
-        <div className="grid grid-cols-2 md:grid-cols-5 gap-4 mb-16 max-w-4xl mx-auto">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-16 max-w-4xl mx-auto">
           {integrations.map((integration, index) => (
             <AnimatedText key={index} delay={index * 0.05}>
               <div className="group p-6 md:p-8 rounded-2xl bg-backgroundAlt border border-black/5 hover:border-primary/20 transition-all text-center hover:-translate-y-1 hover:shadow-soft overflow-visible">
