@@ -769,10 +769,18 @@ function Integrations() {
           </p>
         </AnimatedText>
         
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-16 max-w-4xl mx-auto">
-          {integrations.map((integration, index) => (
-            <AnimatedText key={index} delay={index * 0.05}>
-              <div className="group p-6 md:p-8 rounded-2xl bg-backgroundAlt border border-black/5 hover:border-primary/20 transition-all text-center hover:-translate-y-1 hover:shadow-soft overflow-visible">
+        <div className="relative mb-16 overflow-hidden">
+          {/* Fade edges */}
+          <div className="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-white to-transparent z-10" />
+          <div className="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-white to-transparent z-10" />
+          
+          <motion.div
+            className="flex gap-8 w-max"
+            animate={{ x: ['0%', '-50%'] }}
+            transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
+          >
+            {[...integrations, ...integrations, ...integrations, ...integrations].map((integration, index) => (
+              <div key={index} className="flex-shrink-0 group p-6 md:p-8 rounded-2xl bg-backgroundAlt border border-black/5 hover:border-primary/20 transition-all text-center hover:-translate-y-1 hover:shadow-soft">
                 <div className="h-16 md:h-20 flex items-center justify-center mx-auto mb-4">
                   {integration.isIcon ? (
                     <div className="w-14 h-14 rounded-xl bg-white border border-black/10 flex items-center justify-center">
@@ -786,10 +794,10 @@ function Integrations() {
                     />
                   )}
                 </div>
-                <p className="text-textDark font-semibold">{integration.name}</p>
+                <p className="text-textDark font-semibold whitespace-nowrap">{integration.name}</p>
               </div>
-            </AnimatedText>
-          ))}
+            ))}
+          </motion.div>
         </div>
         
         {/* Code snippet */}
