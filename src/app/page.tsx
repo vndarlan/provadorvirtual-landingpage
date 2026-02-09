@@ -145,11 +145,7 @@ function Header() {
             : 'bg-transparent'
         }`}>
           <div className="max-w-7xl mx-auto flex items-center justify-between w-full">
-            <a href="/" className="flex items-center gap-3">
-              <img src="/logo-full.png" alt="look.me" className="h-16 md:h-20 w-auto" />
-            </a>
-            
-            <nav className="hidden md:flex items-center gap-8">
+            <nav className="hidden md:flex items-center gap-8 flex-1">
               {navLinks.map(link => (
                 <a 
                   key={link.href} 
@@ -165,7 +161,11 @@ function Header() {
               ))}
             </nav>
             
-            <div className="flex items-center gap-3">
+            <a href="/" className="flex items-center">
+              <img src="/logo-full.png" alt="look.me" className="h-10 md:h-12 w-auto" />
+            </a>
+            
+            <div className="flex items-center gap-3 flex-1 justify-end">
               <a 
                 href="#contato" 
                 className={`hidden sm:flex group items-center gap-2 px-5 py-2.5 rounded-full font-semibold text-sm transition-all ${
@@ -248,7 +248,7 @@ function Hero() {
   const scale = useTransform(scrollYProgress, [0, 0.5], [1, 0.9])
   
   return (
-    <section ref={ref} className="relative min-h-screen flex items-start pt-32 md:pt-40 justify-center overflow-hidden bg-primary">
+    <section ref={ref} className="relative min-h-screen flex items-center justify-center overflow-hidden bg-primary">
       {/* Decorative elements */}
       <div className="absolute inset-0">
         <div className="absolute inset-0 bg-gradient-to-b from-primaryDark/20 via-transparent to-primaryDark/30" />
@@ -265,7 +265,7 @@ function Hero() {
         <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:100px_100px]" />
       </div>
       
-      <motion.div style={{ y, opacity, scale }} className="relative z-10 max-w-6xl mx-auto px-6 text-center">
+      <motion.div style={{ y, opacity, scale }} className="relative z-20 max-w-6xl mx-auto px-6 text-center">
         {/* Badge */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -317,43 +317,26 @@ function Hero() {
         </motion.div>
       </motion.div>
       
-      {/* Video/Models showcase at bottom */}
-      <motion.div
-        initial={{ opacity: 0, y: 50 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1, delay: 1 }}
-        className="absolute bottom-0 left-0 right-0 h-[35vh] md:h-[40vh] overflow-hidden"
-      >
-        <div className="absolute inset-0 bg-gradient-to-b from-primary via-primary/50 to-transparent z-10 pointer-events-none" />
-        
-        {/* Placeholder for video/models */}
-        <div className="absolute inset-0 bg-gradient-to-t from-white via-gray-100 to-gray-200 flex items-end justify-center pb-8">
-          <div className="flex gap-4 md:gap-8 items-end">
-            {[1, 2, 3, 4, 5].map((i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 1.2 + i * 0.1 }}
-                className={`bg-gradient-to-t from-gray-400 to-gray-300 rounded-t-full ${
-                  i === 3 ? 'w-20 md:w-28 h-48 md:h-64' : 
-                  i === 2 || i === 4 ? 'w-16 md:w-24 h-44 md:h-56' : 
-                  'w-14 md:w-20 h-40 md:h-48'
-                }`}
-              >
-                <div className="w-8 md:w-12 h-8 md:h-12 bg-gray-300 rounded-full mx-auto -mt-4 md:-mt-6" />
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </motion.div>
+      {/* Video fullscreen background */}
+      <div className="absolute inset-0 z-10">
+        <div className="absolute inset-0 bg-primary/60 z-10" />
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="absolute inset-0 w-full h-full object-cover"
+        >
+          <source src="/hero-video.mp4" type="video/mp4" />
+        </video>
+      </div>
       
       {/* Scroll indicator */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.5 }}
-        className="absolute bottom-[37vh] md:bottom-[42vh] left-1/2 -translate-x-1/2 z-20"
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20"
       >
         <motion.div
           animate={{ y: [0, 10, 0] }}
@@ -770,7 +753,7 @@ function Integrations() {
         
         {/* Terminal + Logos orbital layout */}
         <div className="relative max-w-5xl mx-auto mb-16">
-          <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-0">
+          <div className="flex flex-col lg:flex-row items-center gap-8 lg:gap-0">
             
             {/* Terminal - Left side */}
             <motion.div 
@@ -818,7 +801,7 @@ function Integrations() {
             </motion.div>
 
             {/* Logos - Arc on the right */}
-            <div className="w-full lg:w-1/2 relative flex items-center justify-center" style={{ minHeight: '400px' }}>
+            <div className="w-full lg:w-1/2 relative flex items-center justify-center" style={{ minHeight: '480px' }}>
               {/* Connecting curved lines */}
               <svg className="absolute inset-0 w-full h-full hidden lg:block" viewBox="0 0 400 420" fill="none" preserveAspectRatio="none">
                 {[
@@ -844,10 +827,10 @@ function Integrations() {
               
               {/* Logo cards - arc positions */}
               {[
-                { pos: 'lg:top-[0%] lg:right-[2%]', delay: 0.2 },
-                { pos: 'lg:top-[28%] lg:right-[-2%]', delay: 0.35 },
-                { pos: 'lg:top-[56%] lg:right-[2%]', delay: 0.5 },
-                { pos: 'lg:top-[80%] lg:right-[2%]', delay: 0.65 },
+                { pos: 'lg:top-[-2%] lg:right-[2%]', delay: 0.2 },
+                { pos: 'lg:top-[24%] lg:right-[-2%]', delay: 0.35 },
+                { pos: 'lg:top-[50%] lg:right-[2%]', delay: 0.5 },
+                { pos: 'lg:top-[76%] lg:right-[2%]', delay: 0.65 },
               ].map((position, index) => {
                 const integration = integrations[index]
                 if (!integration) return null
