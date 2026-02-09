@@ -248,7 +248,7 @@ function Hero() {
   const scale = useTransform(scrollYProgress, [0, 0.5], [1, 0.9])
   
   return (
-    <section ref={ref} className="relative flex flex-col items-center overflow-hidden bg-primary">
+    <section ref={ref} className="relative min-h-screen flex items-center justify-center overflow-hidden bg-primary">
       {/* Decorative elements */}
       <div className="absolute inset-0">
         <div className="absolute inset-0 bg-gradient-to-b from-primaryDark/20 via-transparent to-primaryDark/30" />
@@ -265,7 +265,7 @@ function Hero() {
         <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:100px_100px]" />
       </div>
       
-      <motion.div style={{ y, opacity, scale }} className="relative z-10 max-w-6xl mx-auto px-6 text-center pt-32 md:pt-40">
+      <motion.div style={{ y, opacity, scale }} className="relative z-20 max-w-6xl mx-auto px-6 text-center">
         {/* Badge */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -317,25 +317,19 @@ function Hero() {
         </motion.div>
       </motion.div>
       
-      {/* Video below text */}
-      <motion.div
-        initial={{ opacity: 0, y: 50 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1, delay: 1 }}
-        className="relative w-full max-w-6xl mx-auto px-6 mt-12"
-      >
-        <div className="absolute inset-0 bg-gradient-to-b from-primary to-transparent z-10 pointer-events-none h-20" />
-        
+      {/* Video fullscreen background */}
+      <div className="absolute inset-0 z-10">
+        <div className="absolute inset-0 bg-primary/60 z-10" />
         <video
           autoPlay
           loop
           muted
           playsInline
-          className="w-full object-cover rounded-2xl"
+          className="absolute inset-0 w-full h-full object-cover"
         >
           <source src="/hero-video.mp4" type="video/mp4" />
         </video>
-      </motion.div>
+      </div>
       
       {/* Scroll indicator */}
       <motion.div
