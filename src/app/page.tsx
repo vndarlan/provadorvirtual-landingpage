@@ -322,7 +322,7 @@ function Hero() {
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1, delay: 1 }}
-        className="absolute bottom-0 left-0 right-0 h-[35vh] md:h-[40vh] overflow-hidden"
+        className="absolute bottom-0 left-0 right-0 h-[50vh] md:h-[55vh] overflow-hidden"
       >
         <div className="absolute inset-0 bg-gradient-to-b from-primary via-primary/50 to-transparent z-10 pointer-events-none" />
         
