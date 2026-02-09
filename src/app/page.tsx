@@ -831,8 +831,8 @@ function Integrations() {
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-16 max-w-4xl mx-auto">
           {integrations.map((integration, index) => (
             <AnimatedText key={index} delay={index * 0.05}>
-              <div className="group p-6 md:p-8 rounded-2xl bg-backgroundAlt border border-black/5 hover:border-primary/20 transition-all text-center hover:-translate-y-1 hover:shadow-soft">
-                <div className="h-12 md:h-16 flex items-center justify-center mx-auto mb-4">
+              <div className="group p-6 md:p-8 rounded-2xl bg-backgroundAlt border border-black/5 hover:border-primary/20 transition-all text-center hover:-translate-y-1 hover:shadow-soft overflow-visible">
+                <div className="h-16 md:h-20 flex items-center justify-center mx-auto mb-4">
                   {integration.isIcon ? (
                     <div className="w-14 h-14 rounded-xl bg-white border border-black/10 flex items-center justify-center">
                       <Code2 className="w-8 h-8 text-gray-600" />
@@ -841,7 +841,7 @@ function Integrations() {
                     <img 
                       src={integration.logo!} 
                       alt={`Logo ${integration.name}`} 
-                      className="h-full w-auto max-w-[120px] object-contain"
+                      className="h-12 md:h-14 w-auto max-w-[140px] object-contain"
                     />
                   )}
                 </div>
