@@ -546,8 +546,7 @@ function HowItWorks() {
   }
   
   const outfits = [
-    { before: '/demo/model-outfit2.png', after: '/demo/model-outfit1.png', label: 'Look 1 - Cardigan Mostarda' },
-    { before: '/demo/model-outfit1.png', after: '/demo/model-outfit2.png', label: 'Look 2 - Blusa Preta' },
+    { before: '/demo/model-outfit1.png', after: '/demo/model-outfit2.png', label: 'Look 1 - Cardigan Mostarda' },
   ]
   
   const steps = [
