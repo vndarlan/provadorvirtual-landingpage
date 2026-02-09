@@ -824,8 +824,8 @@ function Integrations() {
                 {[
                   'M 40,200 C 140,200 180,30 300,30',
                   'M 40,200 C 160,200 200,150 320,150',
-                  'M 40,200 C 160,200 200,270 300,290',
-                  'M 40,200 C 120,200 140,370 220,380',
+                  'M 40,200 C 160,200 200,270 300,270',
+                  'M 40,200 C 140,200 180,350 300,370',
                 ].map((d, i) => (
                   <motion.path
                     key={i}
@@ -846,8 +846,8 @@ function Integrations() {
               {[
                 { pos: 'lg:top-[0%] lg:right-[2%]', delay: 0.2 },
                 { pos: 'lg:top-[28%] lg:right-[-2%]', delay: 0.35 },
-                { pos: 'lg:top-[58%] lg:right-[2%]', delay: 0.5 },
-                { pos: 'lg:top-[82%] lg:right-[22%]', delay: 0.65 },
+                { pos: 'lg:top-[56%] lg:right-[2%]', delay: 0.5 },
+                { pos: 'lg:top-[80%] lg:right-[2%]', delay: 0.65 },
               ].map((position, index) => {
                 const integration = integrations[index]
                 if (!integration) return null
