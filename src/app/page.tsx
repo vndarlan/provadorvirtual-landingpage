@@ -14,7 +14,6 @@ import {
   Eye,
   CheckCircle2,
   ArrowUpRight,
-  Play,
   ChevronDown,
   Star,
   Users,
@@ -543,32 +542,11 @@ function HowItWorks() {
         <AnimatedText className="text-center mb-16 md:mb-20">
           <SectionLabel light>Como Funciona</SectionLabel>
           <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold text-white mb-6">
-            2 minutos para entender tudo
+            Veja o resultado na prática
           </h2>
           <p className="text-lg text-white/70 max-w-2xl mx-auto">
-            O que fazemos, por que importa — e como isso muda o jogo.
+            Seu cliente escolhe a roupa, envia uma foto e vê como fica — simples assim.
           </p>
-        </AnimatedText>
-        
-        {/* 1. Vídeo Explicativo (full width) */}
-        <AnimatedText className="mb-12 md:mb-16">
-          <div className="max-w-4xl mx-auto">
-            <div className="bg-white/10 backdrop-blur-sm rounded-3xl p-6 md:p-8 border border-white/20">
-              <div className="flex items-center gap-2 mb-6">
-                <Play className="w-5 h-5 text-white/70" />
-                <span className="text-white/70 text-sm font-medium">Vídeo Explicativo</span>
-              </div>
-              
-              <div className="relative aspect-video rounded-2xl overflow-hidden bg-black/30 flex items-center justify-center">
-                <button className="group w-20 h-20 md:w-24 md:h-24 rounded-full bg-white flex items-center justify-center shadow-lg hover:scale-110 transition-transform">
-                  <Play className="w-8 h-8 md:w-10 md:h-10 text-primary ml-1" fill="currentColor" />
-                </button>
-                <p className="absolute bottom-4 left-1/2 -translate-x-1/2 text-white/50 text-sm">
-                  Adicione seu vídeo explicativo
-                </p>
-              </div>
-            </div>
-          </div>
         </AnimatedText>
         
         {/* 2. Catálogo + Resultado lado a lado */}
