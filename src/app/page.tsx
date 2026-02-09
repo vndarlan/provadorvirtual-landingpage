@@ -322,7 +322,7 @@ function Hero() {
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1, delay: 1 }}
-        className="relative w-full mt-12"
+        className="relative w-full max-w-6xl mx-auto px-6 mt-12"
       >
         <div className="absolute inset-0 bg-gradient-to-b from-primary to-transparent z-10 pointer-events-none h-20" />
         
@@ -331,7 +331,7 @@ function Hero() {
           loop
           muted
           playsInline
-          className="w-full object-cover"
+          className="w-full object-cover rounded-2xl"
         >
           <source src="/hero-video.mp4" type="video/mp4" />
         </video>
