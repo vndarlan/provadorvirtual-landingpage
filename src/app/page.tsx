@@ -819,35 +819,35 @@ function Integrations() {
 
             {/* Logos - Arc on the right */}
             <div className="w-full lg:w-1/2 relative flex items-center justify-center" style={{ minHeight: '400px' }}>
-              {/* Connecting dashed lines */}
-              <svg className="absolute inset-0 w-full h-full hidden lg:block" viewBox="0 0 400 400" fill="none">
+              {/* Connecting curved lines */}
+              <svg className="absolute inset-0 w-full h-full hidden lg:block" viewBox="0 0 400 420" fill="none" preserveAspectRatio="none">
                 {[
-                  { x: 280, y: 40 },
-                  { x: 320, y: 160 },
-                  { x: 280, y: 280 },
-                  { x: 160, y: 360 },
-                ].map((pos, i) => (
-                  <motion.line
+                  'M 40,200 C 140,200 180,30 300,30',
+                  'M 40,200 C 160,200 200,150 320,150',
+                  'M 40,200 C 160,200 200,270 300,290',
+                  'M 40,200 C 120,200 140,370 220,380',
+                ].map((d, i) => (
+                  <motion.path
                     key={i}
-                    x1="40" y1="200"
-                    x2={pos.x} y2={pos.y}
+                    d={d}
                     stroke="#E31B23"
-                    strokeWidth="1"
+                    strokeWidth="1.5"
                     strokeDasharray="6 4"
+                    fill="none"
                     initial={{ pathLength: 0, opacity: 0 }}
-                    whileInView={{ pathLength: 1, opacity: 0.25 }}
+                    whileInView={{ pathLength: 1, opacity: 0.3 }}
                     viewport={{ once: true }}
-                    transition={{ duration: 0.8, delay: 0.3 + i * 0.15 }}
+                    transition={{ duration: 1, delay: 0.3 + i * 0.15 }}
                   />
                 ))}
               </svg>
               
-              {/* Logo cards - fixed arc positions */}
+              {/* Logo cards - arc positions */}
               {[
-                { pos: 'lg:top-[0%] lg:right-[5%]', delay: 0.2 },
-                { pos: 'lg:top-[30%] lg:right-[0%]', delay: 0.35 },
-                { pos: 'lg:top-[60%] lg:right-[5%]', delay: 0.5 },
-                { pos: 'lg:top-[85%] lg:right-[30%]', delay: 0.65 },
+                { pos: 'lg:top-[0%] lg:right-[2%]', delay: 0.2 },
+                { pos: 'lg:top-[28%] lg:right-[-2%]', delay: 0.35 },
+                { pos: 'lg:top-[58%] lg:right-[2%]', delay: 0.5 },
+                { pos: 'lg:top-[82%] lg:right-[22%]', delay: 0.65 },
               ].map((position, index) => {
                 const integration = integrations[index]
                 if (!integration) return null
@@ -860,19 +860,24 @@ function Integrations() {
                     transition={{ duration: 0.5, delay: position.delay }}
                     className={`relative lg:absolute ${position.pos} p-4 md:p-5 rounded-2xl bg-backgroundAlt border border-black/5 hover:border-primary/20 transition-all text-center hover:-translate-y-1 hover:shadow-soft`}
                   >
-                    <div className="h-12 w-12 md:h-14 md:w-14 flex items-center justify-center mx-auto mb-2">
-                      {integration.isIcon ? (
-                        <div className="w-12 h-12 rounded-xl bg-white border border-black/10 flex items-center justify-center">
-                          <Code2 className="w-6 h-6 text-gray-600" />
-                        </div>
-                      ) : (
-                        <img 
-                          src={integration.logo!} 
-                          alt={`Logo ${integration.name}`} 
-                          className="h-10 md:h-12 w-auto object-contain rounded-lg"
-                        />
-                      )}
-                    </div>
+                    <motion.div
+                      animate={{ scale: [1, 1.05, 1] }}
+                      transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut', delay: index * 0.5 }}
+                    >
+                      <div className="h-12 w-12 md:h-14 md:w-14 flex items-center justify-center mx-auto mb-2">
+                        {integration.isIcon ? (
+                          <div className="w-12 h-12 rounded-xl bg-white border border-black/10 flex items-center justify-center">
+                            <Code2 className="w-6 h-6 text-gray-600" />
+                          </div>
+                        ) : (
+                          <img 
+                            src={integration.logo!} 
+                            alt={`Logo ${integration.name}`} 
+                            className="h-10 md:h-12 w-auto object-contain rounded-lg"
+                          />
+                        )}
+                      </div>
+                    </motion.div>
                     <p className="text-textDark font-semibold text-sm whitespace-nowrap">{integration.name}</p>
                   </motion.div>
                 )
