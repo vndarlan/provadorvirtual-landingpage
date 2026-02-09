@@ -248,7 +248,7 @@ function Hero() {
   const scale = useTransform(scrollYProgress, [0, 0.5], [1, 0.9])
   
   return (
-    <section ref={ref} className="relative min-h-screen flex items-center justify-center overflow-hidden bg-primary">
+    <section ref={ref} className="relative flex flex-col items-center overflow-hidden bg-primary pt-32 md:pt-40 pb-16">
       {/* Decorative elements */}
       <div className="absolute inset-0">
         <div className="absolute inset-0 bg-gradient-to-b from-primaryDark/20 via-transparent to-primaryDark/30" />
@@ -317,19 +317,23 @@ function Hero() {
         </motion.div>
       </motion.div>
       
-      {/* Video fullscreen background */}
-      <div className="absolute inset-0 z-10">
-        <div className="absolute inset-0 bg-primary/60 z-10" />
+      {/* Video section */}
+      <motion.div
+        initial={{ opacity: 0, y: 50 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1, delay: 1 }}
+        className="relative z-10 w-full max-w-5xl mx-auto px-6 mt-12"
+      >
         <video
           autoPlay
           loop
           muted
           playsInline
-          className="absolute inset-0 w-full h-full object-cover"
+          className="w-full rounded-2xl shadow-2xl"
         >
           <source src="/hero-video.mp4" type="video/mp4" />
         </video>
-      </div>
+      </motion.div>
       
       {/* Scroll indicator */}
       <motion.div
