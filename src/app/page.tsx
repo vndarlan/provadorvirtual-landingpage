@@ -759,7 +759,7 @@ function Integrations() {
         
         {/* Terminal + Logos orbital layout */}
         <div className="relative max-w-5xl mx-auto mb-16">
-          <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-0">
+          <div className="flex flex-col lg:flex-row items-center gap-8 lg:gap-0">
             
             {/* Terminal - Left side */}
             <motion.div 
@@ -807,7 +807,7 @@ function Integrations() {
             </motion.div>
 
             {/* Logos - Arc on the right */}
-            <div className="w-full lg:w-1/2 relative flex items-center justify-center" style={{ minHeight: '400px' }}>
+            <div className="w-full lg:w-1/2 relative flex items-center justify-center" style={{ minHeight: '480px' }}>
               {/* Connecting curved lines */}
               <svg className="absolute inset-0 w-full h-full hidden lg:block" viewBox="0 0 400 420" fill="none" preserveAspectRatio="none">
                 {[
@@ -833,10 +833,10 @@ function Integrations() {
               
               {/* Logo cards - arc positions */}
               {[
-                { pos: 'lg:top-[0%] lg:right-[2%]', delay: 0.2 },
-                { pos: 'lg:top-[28%] lg:right-[-2%]', delay: 0.35 },
-                { pos: 'lg:top-[56%] lg:right-[2%]', delay: 0.5 },
-                { pos: 'lg:top-[80%] lg:right-[2%]', delay: 0.65 },
+                { pos: 'lg:top-[-2%] lg:right-[2%]', delay: 0.2 },
+                { pos: 'lg:top-[24%] lg:right-[-2%]', delay: 0.35 },
+                { pos: 'lg:top-[50%] lg:right-[2%]', delay: 0.5 },
+                { pos: 'lg:top-[76%] lg:right-[2%]', delay: 0.65 },
               ].map((position, index) => {
                 const integration = integrations[index]
                 if (!integration) return null
