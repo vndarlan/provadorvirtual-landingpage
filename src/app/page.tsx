@@ -691,7 +691,7 @@ function WhatMakesUsUnique() {
   ]
   
   return (
-    <section className="py-24 md:py-32 bg-backgroundAlt">
+    <section className="py-24 md:py-32" style={{ backgroundColor: '#FDE8E8' }}>
       <div className="max-w-7xl mx-auto px-4 md:px-6">
         <div className="grid lg:grid-cols-2 gap-12 items-start">
           <AnimatedText>
@@ -929,21 +929,21 @@ function FinalCTA() {
 // ============================================
 function Footer() {
   return (
-    <footer className="py-12 bg-textDark border-t border-white/10">
+    <footer className="py-12 bg-white border-t border-black/5">
       <div className="max-w-7xl mx-auto px-4 md:px-6">
         <div className="flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="flex items-center gap-3">
             <img src="/logo-full.png" alt="look.me" className="h-8 w-auto" />
           </div>
           
-          <p className="text-white/50 text-sm">
+          <p className="text-textMuted text-sm">
             © 2026 look.me • A experiência de IA visual para e-commerce
           </p>
           
           <div className="flex items-center gap-6">
-            <a href="#" className="text-white/50 hover:text-white transition-colors text-sm">Privacidade</a>
-            <a href="#" className="text-white/50 hover:text-white transition-colors text-sm">Termos</a>
-            <a href="mailto:contato@lookme.ai" className="text-white/50 hover:text-white transition-colors text-sm">Contato</a>
+            <a href="#" className="text-textMuted hover:text-primary transition-colors text-sm">Privacidade</a>
+            <a href="#" className="text-textMuted hover:text-primary transition-colors text-sm">Termos</a>
+            <a href="mailto:contato@lookme.ai" className="text-textMuted hover:text-primary transition-colors text-sm">Contato</a>
           </div>
         </div>
       </div>
