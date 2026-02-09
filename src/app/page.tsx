@@ -145,11 +145,7 @@ function Header() {
             : 'bg-transparent'
         }`}>
           <div className="max-w-7xl mx-auto flex items-center justify-between w-full">
-            <a href="/" className="flex items-center gap-3">
-              <img src="/logo-full.png" alt="look.me" className="h-16 md:h-20 w-auto" />
-            </a>
-            
-            <nav className="hidden md:flex items-center gap-8">
+            <nav className="hidden md:flex items-center gap-8 flex-1">
               {navLinks.map(link => (
                 <a 
                   key={link.href} 
@@ -165,7 +161,11 @@ function Header() {
               ))}
             </nav>
             
-            <div className="flex items-center gap-3">
+            <a href="/" className="flex items-center">
+              <img src="/logo-full.png" alt="look.me" className="h-10 md:h-12 w-auto" />
+            </a>
+            
+            <div className="flex items-center gap-3 flex-1 justify-end">
               <a 
                 href="#contato" 
                 className={`hidden sm:flex group items-center gap-2 px-5 py-2.5 rounded-full font-semibold text-sm transition-all ${
