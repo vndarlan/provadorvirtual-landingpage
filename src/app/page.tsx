@@ -582,7 +582,7 @@ function Hero() {
       {/* Video section */}
       <div
         ref={videoRef}
-        className="relative z-10 w-full max-w-6xl mx-auto px-4 -mt-16"
+        className="relative z-10 w-full max-w-7xl mx-auto px-4 -mt-16"
       >
         <video
           autoPlay
@@ -765,14 +765,14 @@ function ImpactROI() {
   ]
   
   return (
-    <section ref={sectionRef} className="py-24 md:py-32 bg-backgroundAlt">
+    <section ref={sectionRef} className="py-24 md:py-32 bg-textDark">
       <div className="max-w-7xl mx-auto px-4 md:px-6">
         <AnimatedText className="text-center mb-16 md:mb-20">
-          <SectionLabel>Impacto e Retorno Sobre o Investimento</SectionLabel>
-          <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold text-textDark mb-6">
+          <SectionLabel light>Impacto e Retorno Sobre o Investimento</SectionLabel>
+          <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold text-white mb-6">
             Sucesso comprovado para líderes de mercado.
           </h2>
-          <p className="text-lg text-textMuted max-w-3xl mx-auto">
+          <p className="text-lg text-white/60 max-w-3xl mx-auto">
             O look.me oferece resultados mensuráveis que diferenciam as marcas de moda.
           </p>
         </AnimatedText>
@@ -781,14 +781,14 @@ function ImpactROI() {
           {stats.map((stat, index) => (
             <AnimatedText key={index} delay={index * 0.15} className="text-center">
               <div className="flex items-center justify-center gap-3 mb-4">
-                <span className="text-5xl md:text-7xl font-bold text-textDark">
+                <span className="text-5xl md:text-7xl font-bold text-white">
                   +<AnimatedCounter value={stat.value} suffix={stat.suffix} />
                 </span>
-                <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
+                <div className="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center">
                   <stat.icon className="w-6 h-6 text-primary" />
                 </div>
               </div>
-              <p className="text-lg text-textMuted">{stat.label}</p>
+              <p className="text-lg text-white/60">{stat.label}</p>
             </AnimatedText>
           ))}
         </div>
@@ -1020,7 +1020,7 @@ function WhatMakesUsUnique() {
   ]
   
   return (
-    <section ref={sectionRef} className="py-24 md:py-32 bg-backgroundAlt">
+    <section ref={sectionRef} className="py-24 md:py-32 bg-white">
       <div className="max-w-7xl mx-auto px-4 md:px-6">
         <div className="grid lg:grid-cols-2 gap-12 items-start">
           <AnimatedText>
