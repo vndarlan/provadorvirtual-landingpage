@@ -248,7 +248,7 @@ function Hero() {
   const scale = useTransform(scrollYProgress, [0, 0.5], [1, 0.9])
   
   return (
-    <section ref={ref} className="relative flex flex-col items-center overflow-hidden bg-white pt-32 md:pt-40 pb-16">
+    <section ref={ref} className="relative flex flex-col items-center overflow-hidden bg-white pt-32 md:pt-36 pb-0">
       {/* Decorative elements */}
       <div className="absolute inset-0">
         <div className="absolute inset-0 bg-gradient-to-b from-backgroundAlt via-transparent to-backgroundAlt/50" />
@@ -270,7 +270,7 @@ function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.3 }}
-          className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/5 border border-primary/20 mb-8"
+          className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/5 border border-primary/20 mb-6"
         >
           <span className="relative flex h-2 w-2">
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
@@ -295,7 +295,7 @@ function Hero() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.5 }}
-          className="text-xl md:text-2xl text-textMuted font-medium mb-12"
+          className="text-xl md:text-2xl text-textMuted font-medium mb-8"
         >
           O provador oficial do seu e-commerce.
         </motion.p>
@@ -321,7 +321,7 @@ function Hero() {
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1, delay: 1 }}
-        className="relative z-10 w-full max-w-5xl mx-auto px-6 mt-12"
+        className="relative z-10 w-full max-w-5xl mx-auto px-6 -mt-2"
       >
         <video
           autoPlay
