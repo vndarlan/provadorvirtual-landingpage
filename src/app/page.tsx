@@ -582,7 +582,7 @@ function Hero() {
       {/* Video section */}
       <div
         ref={videoRef}
-        className="relative z-10 w-full max-w-5xl mx-auto px-6 -mt-16"
+        className="relative z-10 w-full max-w-6xl mx-auto px-4 -mt-16"
       >
         <video
           autoPlay
