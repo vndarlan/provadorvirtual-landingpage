@@ -350,73 +350,55 @@ function Hero() {
     
     // Title split text animation (letras com elastic)
     if (titleRef.current) {
-      const text = titleRef.current.textContent || ''
-      const lines = titleRef.current.innerHTML.split('<br>')
+      // Build split text manually with known content
       titleRef.current.innerHTML = ''
       
-      let highlightBarElement: HTMLSpanElement | null = null
+      const line1Text = 'A experiência da loja física'
+      const line2Text = 'no digital'
       
-      lines.forEach((line, lineIndex) => {
-        const lineSpan = document.createElement('span')
-        lineSpan.style.display = 'block'
-        
-        // Check if this line contains "no digital"
-        if (line.includes('no digital')) {
-          const parts = line.split('no digital')
-          
-          // Text before "no digital"
-          const beforeText = parts[0].trim()
-          if (beforeText) {
-            const beforeChars = beforeText.split('')
-            beforeChars.forEach((char) => {
-              const span = document.createElement('span')
-              span.textContent = char === ' ' ? '\u00A0' : char
-              span.style.display = 'inline-block'
-              span.style.opacity = '0'
-              lineSpan.appendChild(span)
-            })
-            lineSpan.appendChild(document.createTextNode(' '))
-          }
-          
-          // "no digital" with highlight
-          const highlightWrapper = document.createElement('span')
-          highlightWrapper.className = 'relative inline-block'
-          
-          const highlightBar = document.createElement('span')
-          highlightBar.className = 'absolute inset-0 bg-primary -z-10'
-          highlightBar.style.transformOrigin = 'left'
-          highlightBar.style.transform = 'scaleX(0)'
-          highlightWrapper.appendChild(highlightBar)
-          
-          const highlightText = document.createElement('span')
-          highlightText.className = 'relative text-primary px-2'
-          highlightText.textContent = 'no digital'
-          highlightWrapper.appendChild(highlightText)
-          
-          lineSpan.appendChild(highlightWrapper)
-          
-          // Store reference to highlight bar
-          if (lineIndex === 1) {
-            highlightBarElement = highlightBar
-          }
-        } else {
-          // Regular text
-          const chars = line.replace(/<[^>]*>/g, '').split('')
-          chars.forEach((char) => {
-            const span = document.createElement('span')
-            span.textContent = char === ' ' ? '\u00A0' : char
-            span.style.display = 'inline-block'
-            span.style.opacity = '0'
-            lineSpan.appendChild(span)
-          })
-        }
-        
-        titleRef.current!.appendChild(lineSpan)
+      // Line 1
+      const line1 = document.createElement('span')
+      line1.style.display = 'block'
+      line1Text.split('').forEach((char) => {
+        const span = document.createElement('span')
+        span.textContent = char === ' ' ? '\u00A0' : char
+        span.style.display = 'inline-block'
+        span.style.opacity = '0'
+        span.style.transform = 'translateY(20px)'
+        line1.appendChild(span)
       })
+      titleRef.current.appendChild(line1)
       
-      // Animate letters
-      const chars = titleRef.current.querySelectorAll('span > span')
-      gsap.to(chars, {
+      // Line 2 - "no digital" with highlight
+      const line2 = document.createElement('span')
+      line2.style.display = 'block'
+      
+      const highlightWrapper = document.createElement('span')
+      highlightWrapper.className = 'relative inline-block'
+      
+      const highlightBar = document.createElement('span')
+      highlightBar.className = 'absolute inset-0 bg-primary/10 -z-10 rounded-lg'
+      highlightBar.style.transformOrigin = 'left'
+      highlightBar.style.transform = 'scaleX(0)'
+      highlightWrapper.appendChild(highlightBar)
+      
+      const highlightText = document.createElement('span')
+      highlightText.className = 'relative text-primary px-2'
+      line2Text.split('').forEach((char) => {
+        const span = document.createElement('span')
+        span.textContent = char === ' ' ? '\u00A0' : char
+        span.style.display = 'inline-block'
+        span.style.opacity = '0'
+        span.style.transform = 'translateY(20px)'
+        highlightText.appendChild(span)
+      })
+      highlightWrapper.appendChild(highlightText)
+      line2.appendChild(highlightWrapper)
+      titleRef.current.appendChild(line2)
+      
+      // Animate all chars
+      const allChars = titleRef.current.querySelectorAll('span span[style]')
+      gsap.to(allChars, {
         opacity: 1,
         y: 0,
         duration: 0.6,
@@ -426,14 +408,12 @@ function Hero() {
       })
       
       // Animate highlight bar
-      if (highlightBarElement) {
-        gsap.to(highlightBarElement, {
-          scaleX: 1,
-          duration: 0.8,
-          delay: 0.8,
-          ease: 'power2.out',
-        })
-      }
+      gsap.to(highlightBar, {
+        scaleX: 1,
+        duration: 0.8,
+        delay: 0.8,
+        ease: 'power2.out',
+      })
     }
     
     // Slogan
