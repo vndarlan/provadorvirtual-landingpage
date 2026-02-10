@@ -532,7 +532,7 @@ function Hero() {
         />
         <div 
           id="blob2"
-          className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-violet-600/10 rounded-full blur-[150px]" 
+          className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-red-900/10 rounded-full blur-[150px]" 
           style={{ opacity: 0.05 }}
         />
       </div>
