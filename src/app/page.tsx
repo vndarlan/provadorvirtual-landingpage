@@ -816,7 +816,7 @@ function Integrations() {
                   <motion.path
                     key={i}
                     d={d}
-                    stroke="#6366F1"
+                    stroke="#E31B23"
                     strokeWidth="1.5"
                     strokeDasharray="6 4"
                     fill="none"

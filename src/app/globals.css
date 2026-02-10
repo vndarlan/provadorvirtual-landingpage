@@ -5,8 +5,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
 
 :root {
-  --primary: #6366F1;
-  --primary-dark: #4F46E5;
+  --primary: #E31B23;
+  --primary-dark: #B71C1C;
   --accent: #E31B23;
   --white: #FFFFFF;
   --off-white: #F5F5F5;
@@ -33,7 +33,7 @@ body {
 
 /* Selection */
 ::selection {
-  background: rgba(99, 102, 241, 0.2);
+  background: rgba(227, 27, 35, 0.15);
   color: var(--text-dark);
 }
 
@@ -128,7 +128,7 @@ body {
 
 /* Gradient text */
 .gradient-text-primary {
-  background: linear-gradient(135deg, #6366F1 0%, #4F46E5 100%);
+  background: linear-gradient(135deg, #E31B23 0%, #B71C1C 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -144,7 +144,7 @@ body {
 }
 
 .glow-primary {
-  box-shadow: 0 0 30px rgba(99, 102, 241, 0.3);
+  box-shadow: 0 0 30px rgba(227, 27, 35, 0.3);
 }
 
 /* Text glow for red sections */
