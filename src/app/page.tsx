@@ -1078,26 +1078,26 @@ function Integrations() {
       )
     }
     
-    // Typewriter effect for code
+    // Code reveal animation
     if (codeRef.current) {
-      const codeText = codeRef.current.textContent || ''
-      codeRef.current.textContent = ''
-      
-      let i = 0
-      const typewriter = () => {
-        if (i < codeText.length) {
-          codeRef.current!.textContent += codeText.charAt(i)
-          i++
-          setTimeout(typewriter, 20)
-        }
+      const codeLines = codeRef.current.querySelectorAll('.code-line')
+      if (codeLines.length) {
+        gsap.fromTo(codeLines,
+          { opacity: 0, x: -20 },
+          {
+            opacity: 1,
+            x: 0,
+            duration: 0.4,
+            stagger: 0.15,
+            ease: 'power2.out',
+            scrollTrigger: {
+              trigger: codeRef.current,
+              start: 'top bottom-=100',
+              once: true,
+            }
+          }
+        )
       }
-      
-      ScrollTrigger.create({
-        trigger: codeRef.current,
-        start: 'top bottom-=100',
-        once: true,
-        onEnter: typewriter,
-      })
     }
     
     // Animate logo cards
@@ -1180,26 +1180,41 @@ function Integrations() {
                 </div>
                 <pre ref={codeRef} className="p-6 overflow-x-auto">
                   <code className="text-sm leading-relaxed">
-                    <span className="text-primaryLight">{'<script'}</span>{' '}
-                    <span className="text-blue-400">src</span>
-                    <span className="text-white">=</span>
-                    <span className="text-green-400">"https://cdn.lookme.ai/widget.js"</span>
-                    <span className="text-primaryLight">{'>'}</span>
-                    <span className="text-primaryLight">{'</script>'}</span>{'\n\n'}
-                    <span className="text-primaryLight">{'<script>'}</span>{'\n'}
-                    {'  '}<span className="text-blue-400">LookMe</span>
-                    <span className="text-white">.</span>
-                    <span className="text-yellow-400">init</span>
-                    <span className="text-white">{'({'}</span>{'\n'}
-                    {'    '}<span className="text-blue-400">apiKey</span>
-                    <span className="text-white">: </span>
-                    <span className="text-green-400">'sua_api_key'</span>
-                    <span className="text-white">,</span>{'\n'}
-                    {'    '}<span className="text-blue-400">storeId</span>
-                    <span className="text-white">: </span>
-                    <span className="text-green-400">'sua_loja'</span>{'\n'}
-                    {'  '}<span className="text-white">{'});'}</span>{'\n'}
-                    <span className="text-primaryLight">{'</script>'}</span>
+                    <div className="code-line">
+                      <span className="text-primaryLight">{'<script'}</span>{' '}
+                      <span className="text-blue-400">src</span>
+                      <span className="text-white">=</span>
+                      <span className="text-green-400">"https://cdn.lookme.ai/widget.js"</span>
+                      <span className="text-primaryLight">{'>'}</span>
+                      <span className="text-primaryLight">{'</script>'}</span>
+                    </div>
+                    <div className="code-line mt-2">&nbsp;</div>
+                    <div className="code-line">
+                      <span className="text-primaryLight">{'<script>'}</span>
+                    </div>
+                    <div className="code-line">
+                      {'  '}<span className="text-blue-400">LookMe</span>
+                      <span className="text-white">.</span>
+                      <span className="text-yellow-400">init</span>
+                      <span className="text-white">{'({'}</span>
+                    </div>
+                    <div className="code-line">
+                      {'    '}<span className="text-blue-400">apiKey</span>
+                      <span className="text-white">: </span>
+                      <span className="text-green-400">{"'sua_api_key'"}</span>
+                      <span className="text-white">,</span>
+                    </div>
+                    <div className="code-line">
+                      {'    '}<span className="text-blue-400">storeId</span>
+                      <span className="text-white">: </span>
+                      <span className="text-green-400">{"'sua_loja'"}</span>
+                    </div>
+                    <div className="code-line">
+                      {'  '}<span className="text-white">{'});'}</span>
+                    </div>
+                    <div className="code-line">
+                      <span className="text-primaryLight">{'</script>'}</span>
+                    </div>
                   </code>
                 </pre>
               </div>
