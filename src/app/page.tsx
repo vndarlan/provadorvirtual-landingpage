@@ -321,7 +321,7 @@ function Hero() {
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1, delay: 1 }}
-        className="relative z-10 w-full max-w-5xl mx-auto px-6 -mt-2"
+        className="relative z-10 w-full max-w-5xl mx-auto px-6 -mt-8"
       >
         <video
           autoPlay
