@@ -268,8 +268,8 @@ function Header() {
                 href="#contato" 
                 className={`hidden sm:flex group items-center gap-2 px-5 py-2.5 rounded-full font-semibold text-sm transition-all ${
                   scrolled
-                    ? 'bg-primary text-white hover:bg-primaryDark'
-                    : 'bg-primary text-white hover:bg-primaryDark'
+                    ? 'bg-gradient-cta text-white'
+                    : 'bg-gradient-cta text-white'
                 }`}
               >
                 Solicitar Demo
@@ -313,7 +313,7 @@ function Header() {
               <a 
                 href="#contato"
                 onClick={() => setMobileMenuOpen(false)}
-                className="flex items-center justify-center gap-2 px-6 py-3 bg-primary text-white rounded-full font-semibold mt-2 hover:bg-primaryDark transition-colors"
+                className="flex items-center justify-center gap-2 px-6 py-3 bg-gradient-cta text-white rounded-full font-semibold mt-2 transition-colors"
               >
                 Solicitar Demonstração
                 <ArrowRight className="w-4 h-4" />
@@ -383,7 +383,7 @@ function Hero() {
       highlightWrapper.appendChild(highlightBar)
       
       const highlightText = document.createElement('span')
-      highlightText.className = 'relative text-primary px-2'
+      highlightText.className = 'relative gradient-text-primary px-2'
       line2Text.split('').forEach((char) => {
         const span = document.createElement('span')
         span.textContent = char === ' ' ? '\u00A0' : char
@@ -527,12 +527,12 @@ function Hero() {
         <div className="absolute inset-0 bg-gradient-to-b from-backgroundAlt via-transparent to-backgroundAlt/50" />
         <div 
           id="blob1"
-          className="absolute top-1/4 left-1/4 w-[600px] h-[600px] bg-primary/20 rounded-full blur-[150px]" 
+          className="absolute top-1/4 left-1/4 w-[600px] h-[600px] bg-primary/15 rounded-full blur-[150px]" 
           style={{ opacity: 0.08 }}
         />
         <div 
           id="blob2"
-          className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-primary/15 rounded-full blur-[150px]" 
+          className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-violet-600/10 rounded-full blur-[150px]" 
           style={{ opacity: 0.05 }}
         />
       </div>
@@ -571,7 +571,7 @@ function Hero() {
         <div ref={ctaRef}>
           <MagneticButton
             href="#contato"
-            className="group inline-flex items-center gap-3 px-8 py-4 bg-primary rounded-full text-white font-semibold text-lg overflow-hidden transition-all hover:bg-primaryDark hover:scale-105 hover:shadow-lg"
+            className="group inline-flex items-center gap-3 px-8 py-4 bg-gradient-cta rounded-full text-white font-semibold text-lg overflow-hidden transition-all hover:scale-105 hover:shadow-lg"
           >
             Solicite uma demonstração
             <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
@@ -1030,7 +1030,7 @@ function WhatMakesUsUnique() {
             </h2>
             <MagneticButton
               href="#contato"
-              className="inline-flex items-center gap-2 px-6 py-3 bg-primary text-white rounded-full font-semibold hover:bg-primaryDark transition-colors"
+              className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-cta text-white rounded-full font-semibold transition-colors"
             >
               Solicite uma demonstração
               <ArrowRight className="w-4 h-4" />
@@ -1325,7 +1325,7 @@ function FinalCTA() {
           
           <MagneticButton
             href="mailto:contato@lookme.ai"
-            className="group inline-flex items-center gap-3 px-10 py-5 bg-primary text-white rounded-full font-bold text-lg hover:bg-primaryLight transition-all hover:scale-105 hover:shadow-lg"
+            className="group inline-flex items-center gap-3 px-10 py-5 bg-gradient-cta text-white rounded-full font-bold text-lg transition-all hover:scale-105 hover:shadow-lg"
           >
             Solicitar Demonstração
             <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />

@@ -128,10 +128,19 @@ body {
 
 /* Gradient text */
 .gradient-text-primary {
-  background: linear-gradient(135deg, #E31B23 0%, #B71C1C 100%);
+  background: linear-gradient(135deg, #E31B23 0%, #7C3AED 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+}
+
+/* Gradient background for CTAs */
+.bg-gradient-cta {
+  background: linear-gradient(135deg, #E31B23 0%, #7C3AED 100%);
+}
+
+.bg-gradient-cta:hover {
+  background: linear-gradient(135deg, #B71C1C 0%, #6D28D9 100%);
 }
 
 /* Glow effects */
