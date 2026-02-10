@@ -260,7 +260,7 @@ function Header() {
             </nav>
             
             <a href="/" className="flex items-center">
-              <img src="/logo-full.png" alt="look.me" className="h-10 md:h-12 w-auto" />
+              <img src="/logo-full.png" alt="look.me" className="h-14 md:h-16 w-auto" />
             </a>
             
             <div className="flex items-center gap-3 flex-1 justify-end">
