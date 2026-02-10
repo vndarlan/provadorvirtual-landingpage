@@ -42,7 +42,7 @@ import {
 // ============================================
 function SectionLabel({ children, light = false }: { children: string, light?: boolean }) {
   return (
-    <div className={`flex items-center gap-2 mb-4 ${light ? 'text-white/80' : 'text-primary'}`}>
+    <div className={`flex items-center gap-2 mb-4 ${light ? 'text-primaryLight' : 'text-primary'}`}>
       <Plus className="w-4 h-4" />
       <span className="text-sm font-semibold tracking-widest uppercase">
         {children}
@@ -153,7 +153,7 @@ function Header() {
                   className={`transition-colors text-sm font-medium ${
                     scrolled 
                       ? 'text-textDark/60 hover:text-primary' 
-                      : 'text-white/80 hover:text-white'
+                      : 'text-textDark/60 hover:text-primary'
                   }`}
                 >
                   {link.label}
@@ -171,7 +171,7 @@ function Header() {
                 className={`hidden sm:flex group items-center gap-2 px-5 py-2.5 rounded-full font-semibold text-sm transition-all ${
                   scrolled
                     ? 'bg-primary text-white hover:bg-primaryDark'
-                    : 'bg-white text-primary hover:bg-white/90'
+                    : 'bg-primary text-white hover:bg-primaryDark'
                 }`}
               >
                 Solicitar Demo
@@ -183,7 +183,7 @@ function Header() {
                 className={`md:hidden p-2 rounded-lg border ${
                   scrolled 
                     ? 'bg-white border-black/10 text-textDark' 
-                    : 'bg-white/10 border-white/20 text-white'
+                    : 'bg-white border-black/10 text-textDark'
                 }`}
                 aria-label="Menu"
               >
@@ -248,21 +248,20 @@ function Hero() {
   const scale = useTransform(scrollYProgress, [0, 0.5], [1, 0.9])
   
   return (
-    <section ref={ref} className="relative flex flex-col items-center overflow-hidden bg-primary pt-32 md:pt-40 pb-16">
+    <section ref={ref} className="relative flex flex-col items-center overflow-hidden bg-white pt-32 md:pt-40 pb-16">
       {/* Decorative elements */}
       <div className="absolute inset-0">
-        <div className="absolute inset-0 bg-gradient-to-b from-primaryDark/20 via-transparent to-primaryDark/30" />
+        <div className="absolute inset-0 bg-gradient-to-b from-backgroundAlt via-transparent to-backgroundAlt/50" />
         <motion.div 
-          animate={{ scale: [1, 1.2, 1], opacity: [0.2, 0.4, 0.2] }}
+          animate={{ scale: [1, 1.2, 1], opacity: [0.08, 0.15, 0.08] }}
           transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute top-1/4 left-1/4 w-[600px] h-[600px] bg-white/10 rounded-full blur-[150px]" 
+          className="absolute top-1/4 left-1/4 w-[600px] h-[600px] bg-primary/20 rounded-full blur-[150px]" 
         />
         <motion.div 
-          animate={{ scale: [1.2, 1, 1.2], opacity: [0.15, 0.3, 0.15] }}
+          animate={{ scale: [1.2, 1, 1.2], opacity: [0.05, 0.12, 0.05] }}
           transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-white/10 rounded-full blur-[150px]" 
+          className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-primary/15 rounded-full blur-[150px]" 
         />
-        <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:100px_100px]" />
       </div>
       
       <motion.div style={{ y, opacity, scale }} className="relative z-20 max-w-6xl mx-auto px-6 text-center">
@@ -271,13 +270,13 @@ function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.3 }}
-          className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 border border-white/20 backdrop-blur-sm mb-8"
+          className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/5 border border-primary/20 mb-8"
         >
           <span className="relative flex h-2 w-2">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
-            <span className="relative inline-flex rounded-full h-2 w-2 bg-white"></span>
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+            <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
           </span>
-          <span className="text-sm text-white/90">Provador Virtual com Inteligência Artificial</span>
+          <span className="text-sm text-textDark/80">Provador Virtual com Inteligência Artificial</span>
         </motion.div>
         
         {/* Main title */}
@@ -285,10 +284,10 @@ function Hero() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.4 }}
-          className="text-4xl md:text-6xl lg:text-7xl font-bold mb-4 tracking-tight text-white leading-tight"
+          className="text-4xl md:text-6xl lg:text-7xl font-bold mb-4 tracking-tight text-textDark leading-tight"
         >
           A experiência da loja física<br/>
-          <span className="text-white/80">no digital</span>
+          <span className="text-primary">no digital</span>
         </motion.h1>
         
         {/* Slogan */}
@@ -296,7 +295,7 @@ function Hero() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.5 }}
-          className="text-xl md:text-2xl text-white/80 font-medium mb-12"
+          className="text-xl md:text-2xl text-textMuted font-medium mb-12"
         >
           O provador oficial do seu e-commerce.
         </motion.p>
@@ -309,7 +308,7 @@ function Hero() {
         >
           <a 
             href="#contato"
-            className="group inline-flex items-center gap-3 px-8 py-4 bg-white rounded-full text-primary font-semibold text-lg overflow-hidden transition-all hover:shadow-glow-white hover:scale-105"
+            className="group inline-flex items-center gap-3 px-8 py-4 bg-primary rounded-full text-white font-semibold text-lg overflow-hidden transition-all hover:bg-primaryDark hover:scale-105 hover:shadow-lg"
           >
             Solicite uma demonstração
             <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
@@ -345,7 +344,7 @@ function Hero() {
         <motion.div
           animate={{ y: [0, 10, 0] }}
           transition={{ duration: 2, repeat: Infinity }}
-          className="flex flex-col items-center gap-2 text-white/70"
+          className="flex flex-col items-center gap-2 text-textDark/30"
         >
           <ChevronDown className="w-6 h-6" />
         </motion.div>
@@ -377,11 +376,11 @@ function WhatWeDo() {
   ]
   
   return (
-    <section className="py-24 md:py-32 bg-primary">
+    <section className="py-24 md:py-32 bg-backgroundAlt">
       <div className="max-w-7xl mx-auto px-4 md:px-6">
         <AnimatedText className="text-center mb-16 md:mb-20">
-          <SectionLabel light>O Que Fazemos</SectionLabel>
-          <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold text-white">
+          <SectionLabel>O Que Fazemos</SectionLabel>
+          <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold text-textDark">
             E-commerce de moda, reinventado.
           </h2>
         </AnimatedText>
@@ -389,12 +388,12 @@ function WhatWeDo() {
         <div className="grid md:grid-cols-3 gap-6 md:gap-8">
           {items.map((item, index) => (
             <AnimatedText key={index} delay={index * 0.1}>
-              <div className="p-6 md:p-8 rounded-3xl bg-white/10 border border-white/20 hover:bg-white/15 transition-all h-full">
-                <div className="w-14 h-14 rounded-2xl bg-white/20 flex items-center justify-center mb-6">
-                  <item.icon className="w-7 h-7 text-white" />
+              <div className="group p-6 md:p-8 rounded-3xl bg-white border border-black/5 hover:border-primary/20 hover:shadow-soft transition-all h-full">
+                <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center mb-6 group-hover:bg-primary transition-all">
+                  <item.icon className="w-7 h-7 text-primary group-hover:text-white transition-colors" />
                 </div>
-                <h3 className="text-xl md:text-2xl font-bold text-white mb-4">{item.title}</h3>
-                <p className="text-white/70 leading-relaxed">{item.desc}</p>
+                <h3 className="text-xl md:text-2xl font-bold text-textDark mb-4">{item.title}</h3>
+                <p className="text-textMuted leading-relaxed">{item.desc}</p>
               </div>
             </AnimatedText>
           ))}
@@ -524,7 +523,7 @@ function HowItWorks() {
   ]
   
   return (
-    <section id="como-funciona" className="py-24 md:py-32 bg-primary">
+    <section id="como-funciona" className="py-24 md:py-32 bg-textDark">
       <div className="max-w-7xl mx-auto px-4 md:px-6">
         <AnimatedText className="text-center mb-16 md:mb-20">
           <SectionLabel light>Como Funciona</SectionLabel>
@@ -695,7 +694,7 @@ function WhatMakesUsUnique() {
   ]
   
   return (
-    <section className="py-24 md:py-32" style={{ backgroundColor: '#FDE8E8' }}>
+    <section className="py-24 md:py-32 bg-backgroundAlt">
       <div className="max-w-7xl mx-auto px-4 md:px-6">
         <div className="grid lg:grid-cols-2 gap-12 items-start">
           <AnimatedText>
@@ -778,13 +777,13 @@ function Integrations() {
                 </div>
                 <pre className="p-6 overflow-x-auto">
                   <code className="text-sm leading-relaxed">
-                    <span className="text-primary">{'<script'}</span>{' '}
+                    <span className="text-primaryLight">{'<script'}</span>{' '}
                     <span className="text-blue-400">src</span>
                     <span className="text-white">=</span>
                     <span className="text-green-400">"https://cdn.lookme.ai/widget.js"</span>
-                    <span className="text-primary">{'>'}</span>
-                    <span className="text-primary">{'</script>'}</span>{'\n\n'}
-                    <span className="text-primary">{'<script>'}</span>{'\n'}
+                    <span className="text-primaryLight">{'>'}</span>
+                    <span className="text-primaryLight">{'</script>'}</span>{'\n\n'}
+                    <span className="text-primaryLight">{'<script>'}</span>{'\n'}
                     {'  '}<span className="text-blue-400">LookMe</span>
                     <span className="text-white">.</span>
                     <span className="text-yellow-400">init</span>
@@ -797,7 +796,7 @@ function Integrations() {
                     <span className="text-white">: </span>
                     <span className="text-green-400">'sua_loja'</span>{'\n'}
                     {'  '}<span className="text-white">{'});'}</span>{'\n'}
-                    <span className="text-primary">{'</script>'}</span>
+                    <span className="text-primaryLight">{'</script>'}</span>
                   </code>
                 </pre>
               </div>
@@ -817,7 +816,7 @@ function Integrations() {
                   <motion.path
                     key={i}
                     d={d}
-                    stroke="#E31B23"
+                    stroke="#6366F1"
                     strokeWidth="1.5"
                     strokeDasharray="6 4"
                     fill="none"
@@ -882,12 +881,12 @@ function Integrations() {
 // ============================================
 function FinalCTA() {
   return (
-    <section id="contato" className="py-24 md:py-32 relative overflow-hidden bg-primary">
+    <section id="contato" className="py-24 md:py-32 relative overflow-hidden bg-textDark">
       <div className="absolute inset-0">
         <motion.div 
-          animate={{ scale: [1, 1.3, 1], opacity: [0.15, 0.3, 0.15] }}
+          animate={{ scale: [1, 1.3, 1], opacity: [0.1, 0.2, 0.1] }}
           transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-white/10 rounded-full blur-[200px]" 
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-primary/20 rounded-full blur-[200px]" 
         />
       </div>
       
@@ -902,7 +901,7 @@ function FinalCTA() {
           
           <a 
             href="mailto:contato@lookme.ai"
-            className="group inline-flex items-center gap-3 px-10 py-5 bg-white text-primary rounded-full font-bold text-lg hover:shadow-glow-white transition-all hover:scale-105"
+            className="group inline-flex items-center gap-3 px-10 py-5 bg-primary text-white rounded-full font-bold text-lg hover:bg-primaryLight transition-all hover:scale-105 hover:shadow-lg"
           >
             Solicitar Demonstração
             <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />

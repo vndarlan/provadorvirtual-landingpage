@@ -59,11 +59,12 @@
 
 - **Marca:** look.me
 - **Slogan:** "O provador oficial do seu e-commerce."
-- **Paleta:** Dark theme (inspirado em Seedream)
-  - Background: #0A0A0B
-  - Surface: #141416
-  - Accent: #6366F1 (violeta)
-  - Text: #FFFFFF / #8B8D98
+- **Paleta:** Clean fashion (inspirado em Renner)
+  - Background: #FFFFFF / #F5F5F5
+  - Primary/CTA: #6366F1 (violeta)
+  - Logo accent: #E31B23 (vermelho — só na marca)
+  - Text: #1A1A1A / #6B7280
+  - Seções escuras: #1A1A1A (dark sections para contraste)
 
 ## Referências
 
@@ -92,8 +93,14 @@
 
 ### 2026-02-06: Identidade Visual
 - Mudança de dark theme (violet) para red/white (estilo Seedream)
-- Paleta: #E31B23 (vermelho), #FFFFFF (branco), #FAFAFA (off-white)
-- Seções alternam entre fundo vermelho e branco
+
+### 2026-02-10: Redesign Paleta — Clean Fashion
+- Vermelho era demais, site parecia "Coca-Cola"
+- Referência: Renner (vermelho só na logo, resto clean)
+- Nova paleta: branco predominante, violeta nos CTAs, vermelho só na marca
+- Hero: fundo branco com accents violeta
+- Seções "Como Funciona" e "CTA Final": fundo escuro (#1A1A1A) para contraste elegante
+- Seções "O Que Fazemos" e "Únicos": fundo cinza claro (#F5F5F5)
 
 ---
 

@@ -9,16 +9,17 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        // Nova paleta - Estilo Seedream Red
-        primary: '#E31B23',
-        primaryDark: '#B71C1C',
-        primaryLight: '#FF4D4D',
+        // Nova paleta - Clean fashion (estilo Renner)
+        primary: '#6366F1',
+        primaryDark: '#4F46E5',
+        primaryLight: '#818CF8',
+        accent: '#E31B23', // vermelho só na logo
         background: '#FFFFFF',
-        backgroundAlt: '#FAFAFA',
+        backgroundAlt: '#F5F5F5',
         surface: '#FFFFFF',
         textDark: '#1A1A1A',
         textLight: '#FFFFFF',
-        textMuted: '#666666',
+        textMuted: '#6B7280',
         black: '#000000',
       },
       fontFamily: {
@@ -26,13 +27,13 @@ const config: Config = {
       },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-        'gradient-primary': 'linear-gradient(135deg, #E31B23 0%, #B71C1C 100%)',
-        'gradient-glow': 'radial-gradient(ellipse at center, rgba(227, 27, 35, 0.15) 0%, transparent 70%)',
+        'gradient-primary': 'linear-gradient(135deg, #6366F1 0%, #4F46E5 100%)',
+        'gradient-glow': 'radial-gradient(ellipse at center, rgba(99, 102, 241, 0.15) 0%, transparent 70%)',
       },
       boxShadow: {
         'glow-white': '0 0 30px rgba(255, 255, 255, 0.4)',
         'glow-white-lg': '0 0 60px rgba(255, 255, 255, 0.5)',
-        'glow-red': '0 0 30px rgba(227, 27, 35, 0.3)',
+        'glow-primary': '0 0 30px rgba(99, 102, 241, 0.3)',
         'soft': '0 4px 20px rgba(0, 0, 0, 0.08)',
         'soft-lg': '0 8px 40px rgba(0, 0, 0, 0.12)',
       },

@@ -5,10 +5,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
 
 :root {
-  --primary: #E31B23;
-  --primary-dark: #B71C1C;
+  --primary: #6366F1;
+  --primary-dark: #4F46E5;
+  --accent: #E31B23;
   --white: #FFFFFF;
-  --off-white: #FAFAFA;
+  --off-white: #F5F5F5;
   --text-dark: #1A1A1A;
   --black: #000000;
 }
@@ -30,9 +31,9 @@ body {
   overflow-x: hidden;
 }
 
-/* Selection - Red theme */
+/* Selection */
 ::selection {
-  background: rgba(227, 27, 35, 0.2);
+  background: rgba(99, 102, 241, 0.2);
   color: var(--text-dark);
 }
 
@@ -125,9 +126,9 @@ body {
   border: 1px solid rgba(0, 0, 0, 0.05);
 }
 
-/* Gradient text - Red */
-.gradient-text-red {
-  background: linear-gradient(135deg, #E31B23 0%, #B71C1C 100%);
+/* Gradient text */
+.gradient-text-primary {
+  background: linear-gradient(135deg, #6366F1 0%, #4F46E5 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -142,8 +143,8 @@ body {
   box-shadow: 0 0 60px rgba(255, 255, 255, 0.5);
 }
 
-.glow-red {
-  box-shadow: 0 0 30px rgba(227, 27, 35, 0.3);
+.glow-primary {
+  box-shadow: 0 0 30px rgba(99, 102, 241, 0.3);
 }
 
 /* Text glow for red sections */
@@ -182,7 +183,7 @@ button, a, input, textarea {
 }
 
 /* Section transitions */
-.section-red {
+.section-primary {
   background: var(--primary);
   color: var(--white);
 }
