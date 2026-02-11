@@ -383,7 +383,7 @@ function Hero() {
       highlightWrapper.appendChild(highlightBar)
       
       const highlightText = document.createElement('span')
-      highlightText.className = 'relative gradient-text-primary px-2'
+      highlightText.className = 'relative text-primary px-2'
       line2Text.split('').forEach((char) => {
         const span = document.createElement('span')
         span.textContent = char === ' ' ? '\u00A0' : char
@@ -582,7 +582,7 @@ function Hero() {
       {/* Video section */}
       <div
         ref={videoRef}
-        className="relative z-10 w-full max-w-7xl mx-auto px-4 -mt-16"
+        className="relative z-10 w-full max-w-7xl mx-auto px-4 mt-6"
       >
         <video
           autoPlay
@@ -825,9 +825,9 @@ function HowItWorks() {
   ]
   
   return (
-    <section ref={sectionRef} id="como-funciona" className="py-24 md:py-32 bg-textDark">
+    <section ref={sectionRef} id="como-funciona" className="py-16 md:py-24 bg-textDark">
       <div className="max-w-7xl mx-auto px-4 md:px-6">
-        <AnimatedText className="text-center mb-16 md:mb-20">
+        <AnimatedText className="text-center mb-10 md:mb-14">
           <SectionLabel light>Como Funciona</SectionLabel>
           <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold text-white mb-6">
             Veja o resultado na prática
@@ -838,18 +838,18 @@ function HowItWorks() {
         </AnimatedText>
         
         {/* 2. Catálogo + Resultado lado a lado */}
-        <AnimatedText className="mb-16 md:mb-20">
-          <div className="grid lg:grid-cols-2 gap-8 md:gap-12 items-center">
+        <AnimatedText className="mb-8 md:mb-12">
+          <div className="grid lg:grid-cols-2 gap-6 md:gap-8 items-center">
             {/* Lado Esquerdo - Catálogo da Loja */}
             <div className="order-2 lg:order-1">
-              <div className="bg-white/10 backdrop-blur-sm rounded-3xl p-6 md:p-8 border border-white/20">
-                <div className="flex items-center gap-2 mb-6">
+              <div className="bg-white/10 backdrop-blur-sm rounded-3xl p-4 md:p-6 border border-white/20">
+                <div className="flex items-center gap-2 mb-4">
                   <Store className="w-5 h-5 text-white/70" />
                   <span className="text-white/70 text-sm font-medium">Catálogo da Loja</span>
                 </div>
                 
                 {/* Imagem das peças */}
-                <div className="relative rounded-2xl overflow-hidden bg-gray-100 mb-6">
+                <div className="relative rounded-2xl overflow-hidden bg-gray-100 mb-4 max-h-[350px]">
                   <img 
                     src="/demo/outfit-pieces.png" 
                     alt="Peças de roupa - Cardigan, calça e botas" 
@@ -872,8 +872,8 @@ function HowItWorks() {
             
             {/* Lado Direito - Resultado com Slider */}
             <div className="order-1 lg:order-2">
-              <div className="bg-white/10 backdrop-blur-sm rounded-3xl p-6 md:p-8 border border-white/20">
-                <div className="flex items-center justify-between mb-6">
+              <div className="bg-white/10 backdrop-blur-sm rounded-3xl p-4 md:p-6 border border-white/20">
+                <div className="flex items-center justify-between mb-4">
                   <div className="flex items-center gap-2">
                     <Wand2 className="w-5 h-5 text-white/70" />
                     <span className="text-white/70 text-sm font-medium">Resultado da IA</span>
@@ -887,7 +887,7 @@ function HowItWorks() {
                 {/* Slider Antes/Depois */}
                 <div 
                   ref={containerRef}
-                  className="relative rounded-2xl overflow-hidden bg-gray-100 mb-4 cursor-ew-resize select-none"
+                  className="relative rounded-2xl overflow-hidden bg-gray-100 mb-4 cursor-ew-resize select-none max-h-[350px]"
                   onMouseMove={(e) => handleMove(e.clientX)}
                   onTouchMove={(e) => handleMove(e.touches[0].clientX)}
                 >
