@@ -839,7 +839,7 @@ function HowItWorks() {
         
         {/* 2. Catálogo + Resultado lado a lado */}
         <AnimatedText className="mb-8 md:mb-12">
-          <div className="grid lg:grid-cols-2 gap-6 md:gap-8 items-center">
+          <div className="grid lg:grid-cols-2 gap-6 md:gap-8 items-center max-w-5xl mx-auto">
             {/* Lado Esquerdo - Catálogo da Loja */}
             <div className="order-2 lg:order-1">
               <div className="bg-white/10 backdrop-blur-sm rounded-3xl p-4 md:p-6 border border-white/20">
@@ -849,7 +849,7 @@ function HowItWorks() {
                 </div>
                 
                 {/* Imagem das peças */}
-                <div className="relative rounded-2xl overflow-hidden bg-gray-100 mb-4 max-h-[350px]">
+                <div className="relative rounded-2xl overflow-hidden bg-gray-100 mb-4">
                   <img 
                     src="/demo/outfit-pieces.png" 
                     alt="Peças de roupa - Cardigan, calça e botas" 
@@ -887,7 +887,7 @@ function HowItWorks() {
                 {/* Slider Antes/Depois */}
                 <div 
                   ref={containerRef}
-                  className="relative rounded-2xl overflow-hidden bg-gray-100 mb-4 cursor-ew-resize select-none max-h-[350px]"
+                  className="relative rounded-2xl overflow-hidden bg-gray-100 mb-4 cursor-ew-resize select-none"
                   onMouseMove={(e) => handleMove(e.clientX)}
                   onTouchMove={(e) => handleMove(e.touches[0].clientX)}
                 >
