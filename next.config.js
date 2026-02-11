@@ -1,6 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // Railway runs the Node server, no static export needed
+  output: 'export',
   images: {
     unoptimized: true
   }
