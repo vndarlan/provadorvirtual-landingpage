@@ -538,7 +538,7 @@ function Hero() {
         />
       </div>
       
-      <div ref={contentRef} className="relative z-20 max-w-6xl mx-auto px-6 text-center pb-0">
+      <div ref={contentRef} className="relative z-20 max-w-6xl mx-auto px-6 text-center pb-0 mb-0">
         {/* Badge */}
         <div
           ref={badgeRef}
@@ -573,10 +573,10 @@ function Hero() {
       {/* Video section */}
       <div
         ref={videoRef}
-        className="relative z-10 w-full max-w-7xl mx-auto px-4 -mt-4"
+        className="relative z-10 w-full mx-auto px-0 -mt-6"
       >
         {/* CTA floating over video */}
-        <div ref={ctaRef} className="relative z-30 flex justify-center mb-[-32px] translate-y-[50%]">
+        <div ref={ctaRef} className="relative z-30 flex justify-center mb-[-28px]">
           <MagneticButton
             href="#contato"
             className="group inline-flex items-center gap-3 px-8 py-4 bg-gradient-cta rounded-full text-white font-semibold text-lg overflow-hidden transition-all hover:scale-105 hover:shadow-lg shadow-xl"
@@ -590,7 +590,7 @@ function Hero() {
           loop
           muted
           playsInline
-          className="w-full rounded-2xl shadow-2xl"
+          className="w-full rounded-xl shadow-2xl"
         >
           <source src="/hero-video.mp4" type="video/mp4" />
         </video>
