@@ -538,7 +538,7 @@ function Hero() {
         />
       </div>
       
-      <div ref={contentRef} className="relative z-20 max-w-6xl mx-auto px-6 text-center pb-0 mb-0">
+      <div ref={contentRef} className="relative z-20 max-w-6xl mx-auto px-6 text-center pb-0">
         {/* Badge */}
         <div
           ref={badgeRef}
@@ -568,29 +568,29 @@ function Hero() {
           O provador oficial do seu e-commerce.
         </p>
         
-      </div>
-      
-      {/* Video section */}
-      <div
-        ref={videoRef}
-        className="relative z-10 w-full mx-auto px-0 -mt-6"
-      >
-        {/* CTA floating over video */}
-        <div ref={ctaRef} className="relative z-30 flex justify-center mb-[-28px]">
+        {/* CTA */}
+        <div ref={ctaRef}>
           <MagneticButton
             href="#contato"
-            className="group inline-flex items-center gap-3 px-8 py-4 bg-gradient-cta rounded-full text-white font-semibold text-lg overflow-hidden transition-all hover:scale-105 hover:shadow-lg shadow-xl"
+            className="group inline-flex items-center gap-3 px-8 py-4 bg-gradient-cta rounded-full text-white font-semibold text-lg overflow-hidden transition-all hover:scale-105 hover:shadow-lg"
           >
             Solicite uma demonstração
             <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
           </MagneticButton>
         </div>
+      </div>
+      
+      {/* Video section */}
+      <div
+        ref={videoRef}
+        className="relative z-10 w-full max-w-7xl mx-auto px-4 -mt-2"
+      >
         <video
           autoPlay
           loop
           muted
           playsInline
-          className="w-full rounded-xl shadow-2xl"
+          className="w-full rounded-2xl shadow-2xl"
         >
           <source src="/hero-video.mp4" type="video/mp4" />
         </video>
