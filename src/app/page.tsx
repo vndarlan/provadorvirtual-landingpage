@@ -538,7 +538,7 @@ function Hero() {
         />
       </div>
       
-      <div ref={contentRef} className="relative z-20 max-w-6xl mx-auto px-6 text-center">
+      <div ref={contentRef} className="relative z-20 max-w-6xl mx-auto px-6 text-center pb-0">
         {/* Badge */}
         <div
           ref={badgeRef}
@@ -583,7 +583,7 @@ function Hero() {
       {/* Video section */}
       <div
         ref={videoRef}
-        className="relative z-10 w-full max-w-7xl mx-auto px-4 mt-2"
+        className="relative z-10 w-full max-w-7xl mx-auto px-4 -mt-2"
       >
         <video
           autoPlay
