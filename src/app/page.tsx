@@ -227,6 +227,7 @@ function Header() {
   const navLinks = [
     { href: '#solucoes', label: 'Soluções' },
     { href: '#como-funciona', label: 'Como Funciona' },
+    { href: '#precos', label: 'Preços' },
     { href: '#integracoes', label: 'Integrações' },
     { href: '#contato', label: 'Contato' },
   ]
@@ -1055,6 +1056,196 @@ function WhatMakesUsUnique() {
 }
 
 // ============================================
+// PRICING SECTION
+// ============================================
+function Pricing() {
+  const sectionRef = useRef<HTMLElement>(null)
+  const cardsRef = useRef<HTMLDivElement>(null)
+
+  useGSAP(() => {
+    if (!cardsRef.current) return
+    const cards = cardsRef.current.querySelectorAll('.pricing-card')
+    gsap.fromTo(cards,
+      { opacity: 0, y: 60 },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 0.8,
+        stagger: 0.15,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: cardsRef.current,
+          start: 'top bottom-=100',
+        }
+      }
+    )
+  }, { scope: sectionRef })
+
+  const plans = [
+    {
+      name: 'Básico',
+      price: 'R$149,90',
+      period: '/mês',
+      infra: 'R$5',
+      generations: '100',
+      generationCost: 'R$20,00',
+      features: [
+        '100 gerações por mês',
+        'Widget personalizado',
+        'Suporte por email',
+        'Integração básica',
+      ],
+      highlight: false,
+    },
+    {
+      name: 'Pro',
+      price: 'R$279,90',
+      period: '/mês',
+      infra: 'R$15',
+      generations: '300',
+      generationCost: 'R$60,00',
+      features: [
+        '300 gerações por mês',
+        'Widget personalizado',
+        'Suporte prioritário',
+        'Analytics básico',
+        'Integração avançada',
+      ],
+      highlight: true,
+    },
+    {
+      name: 'Ultra',
+      price: 'R$399,90',
+      period: '/mês',
+      infra: 'R$25',
+      generations: '1.000',
+      generationCost: 'R$200,00',
+      features: [
+        '1.000 gerações por mês',
+        'Widget totalmente customizado',
+        'Suporte dedicado',
+        'Analytics completo',
+        'API de integração',
+        'Prioridade no processamento',
+      ],
+      highlight: false,
+    },
+    {
+      name: 'Enterprise',
+      price: 'Sob consulta',
+      period: '',
+      infra: null,
+      generations: 'Ilimitado',
+      generationCost: null,
+      features: [
+        'Gerações ilimitadas',
+        'Infraestrutura dedicada',
+        'SLA personalizado',
+        'Gerente de conta dedicado',
+        'Integração white-label',
+        'Treinamento da equipe',
+      ],
+      highlight: false,
+      isEnterprise: true,
+    },
+  ]
+
+  return (
+    <section ref={sectionRef} id="precos" className="py-24 md:py-32 bg-backgroundAlt">
+      <div className="max-w-7xl mx-auto px-4 md:px-6">
+        <AnimatedText className="text-center mb-16 md:mb-20">
+          <SectionLabel>Planos e Preços</SectionLabel>
+          <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold text-textDark mb-6">
+            Escolha o plano ideal para sua loja
+          </h2>
+          <p className="text-lg text-textMuted max-w-2xl mx-auto">
+            Comece pequeno e escale conforme sua demanda cresce. Sem taxa de setup.
+          </p>
+        </AnimatedText>
+
+        <div ref={cardsRef} className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {plans.map((plan, index) => (
+            <div
+              key={index}
+              className={`pricing-card relative p-6 md:p-8 rounded-3xl border transition-all h-full flex flex-col ${
+                plan.highlight
+                  ? 'bg-textDark text-white border-primary shadow-glow-red scale-[1.02]'
+                  : 'bg-white border-black/5 hover:border-primary/20 hover:shadow-soft'
+              }`}
+            >
+              {plan.highlight && (
+                <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full bg-gradient-cta text-white text-xs font-bold uppercase tracking-wider">
+                  Popular
+                </div>
+              )}
+
+              <div className="mb-6">
+                <h3 className={`text-xl font-bold mb-2 ${plan.highlight ? 'text-white' : 'text-textDark'}`}>
+                  {plan.name}
+                </h3>
+                <div className="flex items-baseline gap-1">
+                  <span className={`text-3xl md:text-4xl font-bold ${plan.highlight ? 'text-white' : 'text-textDark'}`}>
+                    {plan.price}
+                  </span>
+                  {plan.period && (
+                    <span className={`text-sm ${plan.highlight ? 'text-white/60' : 'text-textMuted'}`}>
+                      {plan.period}
+                    </span>
+                  )}
+                </div>
+              </div>
+
+              {!plan.isEnterprise && (
+                <div className={`mb-6 p-4 rounded-xl ${plan.highlight ? 'bg-white/10' : 'bg-backgroundAlt'}`}>
+                  <div className="flex justify-between text-sm mb-1">
+                    <span className={plan.highlight ? 'text-white/70' : 'text-textMuted'}>Gerações/mês</span>
+                    <span className={`font-semibold ${plan.highlight ? 'text-white' : 'text-textDark'}`}>{plan.generations}</span>
+                  </div>
+                  <div className="flex justify-between text-sm mb-1">
+                    <span className={plan.highlight ? 'text-white/70' : 'text-textMuted'}>Infra</span>
+                    <span className={`font-semibold ${plan.highlight ? 'text-white' : 'text-textDark'}`}>{plan.infra}/mês</span>
+                  </div>
+                  <div className="flex justify-between text-sm">
+                    <span className={plan.highlight ? 'text-white/70' : 'text-textMuted'}>Custo gerações</span>
+                    <span className={`font-semibold ${plan.highlight ? 'text-white' : 'text-textDark'}`}>{plan.generationCost}</span>
+                  </div>
+                </div>
+              )}
+
+              <ul className="space-y-3 mb-8 flex-1">
+                {plan.features.map((feature, i) => (
+                  <li key={i} className="flex items-start gap-3">
+                    <CheckCircle2 className={`w-5 h-5 flex-shrink-0 mt-0.5 ${
+                      plan.highlight ? 'text-primary' : 'text-primary'
+                    }`} />
+                    <span className={`text-sm ${plan.highlight ? 'text-white/80' : 'text-textMuted'}`}>
+                      {feature}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+
+              <a
+                href={plan.isEnterprise ? 'mailto:contato@lookme.ai' : '#contato'}
+                className={`block text-center py-3 px-6 rounded-full font-semibold text-sm transition-all ${
+                  plan.highlight
+                    ? 'bg-white text-textDark hover:bg-white/90'
+                    : plan.isEnterprise
+                    ? 'bg-textDark text-white hover:bg-textDark/90'
+                    : 'bg-gradient-cta text-white hover:opacity-90'
+                }`}
+              >
+                {plan.isEnterprise ? 'Fale Conosco' : 'Começar Agora'}
+              </a>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}
+
+// ============================================
 // INTEGRATIONS
 // ============================================
 function Integrations() {
@@ -1433,6 +1624,7 @@ export default function Home() {
         <Solutions />
         <ImpactROI />
         <WhatMakesUsUnique />
+        <Pricing />
         <Integrations />
         <FinalCTA />
         <Footer />
