@@ -1530,7 +1530,7 @@ function Footer() {
       <div className="max-w-7xl mx-auto px-4 md:px-6">
         <div className="flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="flex items-center gap-3">
-            <img src="/logo-full.png" alt="look.me" className="h-8 w-auto" />
+            <img src="/logo-full.png" alt="look.me" className="h-14 w-auto" />
           </div>
           
           <p className="text-textMuted text-sm">
