@@ -568,23 +568,23 @@ function Hero() {
           O provador oficial do seu e-commerce.
         </p>
         
-        {/* CTA */}
-        <div ref={ctaRef}>
-          <MagneticButton
-            href="#contato"
-            className="group inline-flex items-center gap-3 px-8 py-4 bg-gradient-cta rounded-full text-white font-semibold text-lg overflow-hidden transition-all hover:scale-105 hover:shadow-lg"
-          >
-            Solicite uma demonstração
-            <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-          </MagneticButton>
-        </div>
       </div>
       
       {/* Video section */}
       <div
         ref={videoRef}
-        className="relative z-10 w-full max-w-7xl mx-auto px-4 -mt-2"
+        className="relative z-10 w-full max-w-7xl mx-auto px-4 -mt-4"
       >
+        {/* CTA floating over video */}
+        <div ref={ctaRef} className="relative z-30 flex justify-center mb-[-32px] translate-y-[50%]">
+          <MagneticButton
+            href="#contato"
+            className="group inline-flex items-center gap-3 px-8 py-4 bg-gradient-cta rounded-full text-white font-semibold text-lg overflow-hidden transition-all hover:scale-105 hover:shadow-lg shadow-xl"
+          >
+            Solicite uma demonstração
+            <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+          </MagneticButton>
+        </div>
         <video
           autoPlay
           loop
