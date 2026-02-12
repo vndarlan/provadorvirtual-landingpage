@@ -1086,14 +1086,14 @@ function Pricing() {
       name: 'Básico',
       price: 'R$149,90',
       period: '/mês',
-      infra: 'R$5',
       generations: '100',
-      generationCost: 'R$20,00',
       features: [
         '100 gerações por mês',
         'Widget personalizado',
-        'Suporte por email',
-        'Integração básica',
+        'Dashboard de métricas',
+        'Ads personalizado',
+        'Tutorial passo a passo',
+        'Suporte dedicado',
       ],
       highlight: false,
     },
@@ -1101,15 +1101,14 @@ function Pricing() {
       name: 'Pro',
       price: 'R$279,90',
       period: '/mês',
-      infra: 'R$15',
       generations: '300',
-      generationCost: 'R$60,00',
       features: [
         '300 gerações por mês',
         'Widget personalizado',
-        'Suporte prioritário',
-        'Analytics básico',
-        'Integração avançada',
+        'Dashboard de métricas',
+        'Ads personalizado',
+        'Tutorial passo a passo',
+        'Suporte dedicado',
       ],
       highlight: true,
     },
@@ -1117,16 +1116,14 @@ function Pricing() {
       name: 'Ultra',
       price: 'R$399,90',
       period: '/mês',
-      infra: 'R$25',
       generations: '1.000',
-      generationCost: 'R$200,00',
       features: [
         '1.000 gerações por mês',
-        'Widget totalmente customizado',
+        'Widget personalizado',
+        'Dashboard de métricas',
+        'Ads personalizado',
+        'Tutorial passo a passo',
         'Suporte dedicado',
-        'Analytics completo',
-        'API de integração',
-        'Prioridade no processamento',
       ],
       highlight: false,
     },
@@ -1134,17 +1131,8 @@ function Pricing() {
       name: 'Enterprise',
       price: 'Sob consulta',
       period: '',
-      infra: null,
-      generations: 'Ilimitado',
-      generationCost: null,
-      features: [
-        'Gerações ilimitadas',
-        'Infraestrutura dedicada',
-        'SLA personalizado',
-        'Gerente de conta dedicado',
-        'Integração white-label',
-        'Treinamento da equipe',
-      ],
+      generations: null,
+      features: [],
       highlight: false,
       isEnterprise: true,
     },
@@ -1195,35 +1183,26 @@ function Pricing() {
                 </div>
               </div>
 
-              {!plan.isEnterprise && (
-                <div className={`mb-6 p-4 rounded-xl ${plan.highlight ? 'bg-white/10' : 'bg-backgroundAlt'}`}>
-                  <div className="flex justify-between text-sm mb-1">
-                    <span className={plan.highlight ? 'text-white/70' : 'text-textMuted'}>Gerações/mês</span>
-                    <span className={`font-semibold ${plan.highlight ? 'text-white' : 'text-textDark'}`}>{plan.generations}</span>
-                  </div>
-                  <div className="flex justify-between text-sm mb-1">
-                    <span className={plan.highlight ? 'text-white/70' : 'text-textMuted'}>Infra</span>
-                    <span className={`font-semibold ${plan.highlight ? 'text-white' : 'text-textDark'}`}>{plan.infra}/mês</span>
-                  </div>
-                  <div className="flex justify-between text-sm">
-                    <span className={plan.highlight ? 'text-white/70' : 'text-textMuted'}>Custo gerações</span>
-                    <span className={`font-semibold ${plan.highlight ? 'text-white' : 'text-textDark'}`}>{plan.generationCost}</span>
-                  </div>
+              {plan.isEnterprise ? (
+                <div className="flex-1 flex flex-col justify-center">
+                  <p className="text-textMuted text-sm leading-relaxed mb-8">
+                    Plano personalizado para sua operação. Entre em contato e montamos a melhor solução para o seu negócio.
+                  </p>
                 </div>
+              ) : (
+                <ul className="space-y-3 mb-8 flex-1">
+                  {plan.features.map((feature, i) => (
+                    <li key={i} className="flex items-start gap-3">
+                      <CheckCircle2 className={`w-5 h-5 flex-shrink-0 mt-0.5 ${
+                        plan.highlight ? 'text-primary' : 'text-primary'
+                      }`} />
+                      <span className={`text-sm ${plan.highlight ? 'text-white/80' : 'text-textMuted'}`}>
+                        {feature}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
               )}
-
-              <ul className="space-y-3 mb-8 flex-1">
-                {plan.features.map((feature, i) => (
-                  <li key={i} className="flex items-start gap-3">
-                    <CheckCircle2 className={`w-5 h-5 flex-shrink-0 mt-0.5 ${
-                      plan.highlight ? 'text-primary' : 'text-primary'
-                    }`} />
-                    <span className={`text-sm ${plan.highlight ? 'text-white/80' : 'text-textMuted'}`}>
-                      {feature}
-                    </span>
-                  </li>
-                ))}
-              </ul>
 
               <a
                 href={plan.isEnterprise ? 'mailto:contato@lookme.ai' : '#contato'}
