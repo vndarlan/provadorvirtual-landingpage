@@ -522,7 +522,7 @@ function Hero() {
   }, [])
   
   return (
-    <section ref={sectionRef} className="relative flex flex-col items-center overflow-hidden bg-white pt-32 md:pt-36 pb-0">
+    <section ref={sectionRef} className="relative flex flex-col items-center overflow-hidden bg-white pt-24 md:pt-28 pb-0">
       {/* Decorative elements */}
       <div className="absolute inset-0">
         <div className="absolute inset-0 bg-gradient-to-b from-backgroundAlt via-transparent to-backgroundAlt/50" />
@@ -563,7 +563,7 @@ function Hero() {
         {/* Slogan */}
         <p
           ref={sloganRef}
-          className="text-xl md:text-2xl text-textMuted font-medium mb-8"
+          className="text-xl md:text-2xl text-textMuted font-medium mb-5"
         >
           O provador oficial do seu e-commerce.
         </p>
@@ -583,7 +583,7 @@ function Hero() {
       {/* Video section */}
       <div
         ref={videoRef}
-        className="relative z-10 w-full max-w-7xl mx-auto px-4 mt-6"
+        className="relative z-10 w-full max-w-7xl mx-auto px-4 mt-2"
       >
         <video
           autoPlay
