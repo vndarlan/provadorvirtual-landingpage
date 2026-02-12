@@ -522,7 +522,7 @@ function Hero() {
   }, [])
   
   return (
-    <section ref={sectionRef} className="relative flex flex-col items-center overflow-hidden bg-white pt-24 md:pt-28 pb-0">
+    <section ref={sectionRef} className="relative flex flex-col items-center overflow-hidden bg-white pt-20 md:pt-24 pb-0">
       {/* Decorative elements */}
       <div className="absolute inset-0">
         <div className="absolute inset-0 bg-gradient-to-b from-backgroundAlt via-transparent to-backgroundAlt/50" />
@@ -542,7 +542,7 @@ function Hero() {
         {/* Badge */}
         <div
           ref={badgeRef}
-          className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/5 border border-primary/20 mb-6"
+          className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/5 border border-primary/20 mb-4"
         >
           <span className="relative flex h-2 w-2">
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
@@ -554,7 +554,7 @@ function Hero() {
         {/* Main title */}
         <h1
           ref={titleRef}
-          className="text-4xl md:text-6xl lg:text-7xl font-bold mb-4 tracking-tight text-textDark leading-tight"
+          className="text-4xl md:text-6xl lg:text-7xl font-bold mb-2 tracking-tight text-textDark leading-tight"
         >
           A experiência da loja física<br/>
           <span className="text-primary">no digital</span>
@@ -563,7 +563,7 @@ function Hero() {
         {/* Slogan */}
         <p
           ref={sloganRef}
-          className="text-xl md:text-2xl text-textMuted font-medium mb-5"
+          className="text-xl md:text-2xl text-textMuted font-medium mb-3"
         >
           O provador oficial do seu e-commerce.
         </p>
